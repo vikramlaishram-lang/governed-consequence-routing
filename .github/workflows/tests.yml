@@ -1,4 +1,4 @@
-﻿name: Verify Decision Envelope Promotion and Chain Integrity
+name: Verify Decision Envelope Promotion and Chain Integrity
 
 on:
   push:
