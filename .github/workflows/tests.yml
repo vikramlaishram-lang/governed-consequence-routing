@@ -1,49 +1,47 @@
-name: Verify Decision Envelope Promotion and Chain Integrity
+﻿name: Verify Decision Envelope Promotion and Chain Integrity
 
 on:
-push:
-branches:
-- main
-pull_request:
-branches:
-- main
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-verify:
-name: Verify governed consequence routing
-runs-on: ubuntu-latest
+  verify:
+    name: Verify governed consequence routing
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Check out repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: "3.13"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
 
-  - name: Install dependencies
-    run: |
-      python -m pip install --upgrade pip
-      python -m pip install pytest jsonschema
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest jsonschema
 
-  - name: Validate schema and examples
-    run: |
-      python -m json.tool schemas/decision_envelope_v0.1.schema.json > /dev/null
-      python -m json.tool examples/allow_read_source_file.v0.1.json > /dev/null
-      python -m json.tool examples/deny_read_env_file.v0.1.json > /dev/null
-      python -m json.tool examples/request_review_modify_workflow.v0.1.json > /dev/null
+      - name: Validate schema and examples
+        run: |
+          python -m json.tool schemas/decision_envelope_v0.1.schema.json > /dev/null
+          python -m json.tool examples/allow_read_source_file.v0.1.json > /dev/null
+          python -m json.tool examples/deny_read_env_file.v0.1.json > /dev/null
+          python -m json.tool examples/request_review_modify_workflow.v0.1.json > /dev/null
 
-  - name: Run test suite
-    run: |
-      python -m pytest -q
+      - name: Run test suite
+        run: |
+          python -m pytest -q
 
-  - name: Promote fixture governance events
-    run: |
-      python tools/promote_to_envelope.py tests/fixtures/governance_events/ollama_event_sample.jsonl -o envelopes.json --verify
+      - name: Promote fixture governance events
+        run: |
+          python tools/promote_to_envelope.py tests/fixtures/governance_events/ollama_event_sample.jsonl -o envelopes.json --verify
 
-  - name: Verify promoted envelope chain with mutation checks
-    run: |
-      python tools/verify_envelope_chain.py envelopes.json --mutate --verbose
-```
+      - name: Verify promoted envelope chain with mutation checks
+        run: |
+          python tools/verify_envelope_chain.py envelopes.json --mutate --verbose
