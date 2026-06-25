@@ -1,0 +1,352 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://github.com/vikramlaishram-lang/governed-consequence-routing/schemas/decision_envelope_v0.1.schema.json",
+"title": "Decision Envelope v0.1",
+"description": "A canonical governance record for one proposed AI-agent consequence. A decision envelope records what was proposed, how it was classified, what policy/evidence/review state applied, what decision was made, whether execution occurred, and how the record links into a verifiable envelope chain.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"created_at",
+"runtime_id",
+"proposal_id",
+"proposal_hash",
+"agent_id",
+"proposed_action",
+"normalized_action",
+"normalized_action_hash",
+"consequence_classification",
+"policy_hash",
+"policy_version",
+"decision_engine_version",
+"decision",
+"decision_basis",
+"decision_reason",
+"review_status",
+"execution_boundary",
+"execution_status",
+"outcome_status",
+"evidence_references",
+"tamper_evidence_mode",
+"previous_record_hash",
+"record_hash",
+"verifier_version"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "decision_envelope_v0.1",
+"description": "Exact schema version for this decision envelope."
+},
+"created_at": {
+"type": "string",
+"format": "date-time",
+"description": "UTC timestamp when the decision envelope was created or promoted from a runtime governance event."
+},
+"runtime_id": {
+"type": "string",
+"minLength": 1,
+"description": "Identifier for the runtime, gateway, MCP proxy, or governed execution environment that emitted the source governance event."
+},
+"proposal_id": {
+"type": "string",
+"format": "uuid",
+"description": "Unique identifier for the proposed consequence being governed."
+},
+"proposal_hash": {
+"type": "string",
+"pattern": "^sha256:[a-f0-9]{64}$",
+"description": "SHA-256 hash of the proposed_action value."
+},
+"agent_id": {
+"type": "string",
+"minLength": 1,
+"description": "Identifier for the agent, model wrapper, tool caller, or governed actor that proposed the consequence."
+},
+"agent_identity_manifest_hash": {
+"type": ["string", "null"],
+"pattern": "^sha256:[a-f0-9]{64}$",
+"default": null,
+"description": "Optional hash of the agent identity manifest that defines the proposing agent's declared identity and authority scope."
+},
+"proposed_action": {
+"type": "string",
+"minLength": 1,
+"description": "Exact proposed action, claim, handoff, or consequence-bearing request as received by the governance layer. This field must not be silently rewritten."
+},
+"normalized_action": {
+"type": "string",
+"minLength": 1,
+"description": "Deterministically normalized representation of the proposed action used for classification, policy evaluation, hashing, and verification."
+},
+"normalized_action_hash": {
+"type": "string",
+"pattern": "^sha256:[a-f0-9]{64}$",
+"description": "SHA-256 hash of the normalized_action value."
+},
+"consequence_classification": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"consequence_class",
+"risk_level",
+"reversibility",
+"blast_radius",
+"authority_required",
+"evidence_required",
+"classification_method",
+"classification_confidence"
+],
+"properties": {
+"consequence_class": {
+"type": "string",
+"enum": [
+"UNBOUNDED_SHELL_EXECUTION",
+"SECRET_ACCESS",
+"CREDENTIAL_EXPOSURE",
+"DATA_EXPORT",
+"EXTERNAL_COMMUNICATION",
+"PRODUCTION_STATE_CHANGE",
+"POLICY_MUTATION",
+"IDENTITY_OR_PERMISSION_CHANGE",
+"IRREVERSIBLE_DELETE",
+"CLAIM_PUBLICATION",
+"MODEL_OR_PROMPT_MODIFICATION",
+"SELF_MODIFICATION",
+"READ_ONLY_ACCESS",
+"LOCAL_COMPUTATION",
+"UNKNOWN"
+],
+"description": "Governance class of the proposed consequence."
+},
+"risk_level": {
+"type": "string",
+"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+"description": "Risk level assigned to the proposed consequence."
+},
+"reversibility": {
+"type": "string",
+"enum": [
+"REVERSIBLE",
+"PARTIALLY_REVERSIBLE",
+"IRREVERSIBLE",
+"UNKNOWN"
+],
+"description": "Whether the consequence can be undone or meaningfully remediated."
+},
+"blast_radius": {
+"type": "string",
+"enum": [
+"LOCAL",
+"USER",
+"TEAM",
+"ORGANIZATION",
+"EXTERNAL",
+"UNKNOWN"
+],
+"description": "Estimated scope of impact if the proposed consequence proceeds."
+},
+"authority_required": {
+"type": "string",
+"enum": [
+"NONE",
+"USER",
+"REVIEWER",
+"ADMIN",
+"EXTERNAL_AUTHORITY",
+"HUMAN_APPROVAL"
+],
+"description": "Authority level required before the proposed consequence may proceed."
+},
+"evidence_required": {
+"type": "string",
+"enum": [
+"NONE",
+"LOCAL_EVIDENCE",
+"EXTERNAL_EVIDENCE",
+"STATE_WITNESS",
+"EVIDENCE_MANIFEST",
+"HUMAN_APPROVAL"
+],
+"description": "Evidence requirement for admitting or authorizing the proposed consequence."
+},
+"classification_method": {
+"type": "string",
+"enum": [
+"DETERMINISTIC_RULE",
+"LLM_CLASSIFIED",
+"HYBRID",
+"FALLBACK"
+],
+"description": "Method used to classify the proposed consequence."
+},
+"classification_confidence": {
+"type": "string",
+"enum": ["HIGH", "MEDIUM", "LOW", "UNCERTAIN"],
+"description": "Confidence assigned to the consequence classification."
+}
+}
+},
+"policy_hash": {
+"type": "string",
+"pattern": "^sha256:[a-f0-9]{64}$",
+"description": "SHA-256 hash of the active policy applied at decision time."
+},
+"policy_version": {
+"type": "string",
+"minLength": 1,
+"description": "Version identifier for the active policy applied at decision time."
+},
+"policy_rule_id": {
+"type": ["string", "null"],
+"default": null,
+"description": "Optional identifier of the specific policy rule that determined or contributed to the decision."
+},
+"decision_engine_version": {
+"type": "string",
+"minLength": 1,
+"description": "Version of the decision engine or governance runtime that produced the decision."
+},
+"evidence_manifest_hash": {
+"type": ["string", "null"],
+"pattern": "^sha256:[a-f0-9]{64}$",
+"default": null,
+"description": "Optional hash of the evidence manifest associated with this decision envelope."
+},
+"evidence_references": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": [],
+"description": "References to evidence items used in the decision. Required even when empty; an empty array means no evidence references were attached."
+},
+"state_witness_hash": {
+"type": ["string", "null"],
+"pattern": "^sha256:[a-f0-9]{64}$",
+"default": null,
+"description": "Optional hash of a state witness used to bind approval or decision context to observed system state."
+},
+"decision": {
+"type": "string",
+"enum": ["ALLOW", "DENY", "REQUEST_REVIEW", "QUARANTINE"],
+"description": "Governance decision for the proposed consequence."
+},
+"decision_basis": {
+"type": "string",
+"enum": [
+"POLICY_RULE",
+"REVIEWER_APPROVAL",
+"CONSERVATIVE_FALLBACK",
+"EVIDENCE_FAILURE",
+"SYSTEM_GUARD"
+],
+"description": "Basis for the decision."
+},
+"decision_reason": {
+"type": "string",
+"minLength": 1,
+"description": "Human-readable reason for the decision."
+},
+"review_status": {
+"type": "string",
+"enum": [
+"NOT_REQUIRED",
+"PENDING",
+"APPROVED",
+"REJECTED",
+"EXPIRED",
+"INVALIDATED"
+],
+"description": "Review lifecycle state for the proposed consequence."
+},
+"reviewer_authority_id": {
+"type": ["string", "null"],
+"default": null,
+"description": "Identifier for the reviewer or approving authority. Must be non-null when review_status is APPROVED or REJECTED."
+},
+"approval_scope": {
+"type": ["string", "null"],
+"default": null,
+"description": "Optional scope of reviewer approval, if approval was required."
+},
+"approval_expiry": {
+"type": ["string", "null"],
+"format": "date-time",
+"default": null,
+"description": "Optional expiration timestamp for reviewer approval."
+},
+"execution_boundary": {
+"type": "string",
+"enum": [
+"LOCAL_STUB",
+"MCP_PROXY",
+"CONTROLLED_PILOT",
+"NOT_EXECUTED"
+],
+"description": "Boundary within which execution occurred or was prevented."
+},
+"execution_status": {
+"type": "string",
+"enum": [
+"NOT_EXECUTED",
+"EXECUTED",
+"BLOCKED",
+"FAILED",
+"PARTIAL",
+"PENDING"
+],
+"description": "Whether the proposed consequence executed, failed, was blocked, remained pending, or partially executed."
+},
+"outcome_status": {
+"type": "string",
+"enum": [
+"SUCCESS",
+"FAILURE",
+"BLOCKED",
+"QUARANTINED",
+"PENDING_REVIEW"
+],
+"description": "Outcome of the governed proposal after decision and execution boundary handling."
+},
+"outcome_hash": {
+"type": ["string", "null"],
+"pattern": "^sha256:[a-f0-9]{64}$",
+"default": null,
+"description": "Optional SHA-256 hash of the execution result or outcome artifact."
+},
+"failure_mode": {
+"type": ["string", "null"],
+"default": null,
+"description": "Optional failure mode if decision, review, promotion, execution, or verification failed."
+},
+"tamper_evidence_mode": {
+"type": "string",
+"enum": [
+"UNKEYED_HASH_CHAIN",
+"HMAC_SHA256_V1"
+],
+"description": "Tamper-evidence mechanism used for this record."
+},
+"key_id": {
+"type": ["string", "null"],
+"default": null,
+"description": "Optional key identifier when tamper_evidence_mode uses keyed authentication such as HMAC_SHA256_V1."
+},
+"previous_record_hash": {
+"type": "string",
+"pattern": "^(sha256:[a-f0-9]{64}|0{64})$",
+"description": "Hash of the previous decision envelope in the chain. The first envelope uses the bare 64-zero genesis value; subsequent envelopes use the full previous record_hash including the sha256: prefix."
+},
+"record_hash": {
+"type": "string",
+"pattern": "^sha256:[a-f0-9]{64}$",
+"description": "SHA-256 hash of the canonical JSON envelope excluding this record_hash field. Canonical JSON uses sorted keys, compact separators, and ensure_ascii=false."
+},
+"verifier_version": {
+"type": "string",
+"minLength": 1,
+"description": "Version of the verifier expected to validate this decision envelope."
+}
+}
+}
