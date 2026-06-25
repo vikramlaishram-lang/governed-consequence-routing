@@ -1,8 +1,10 @@
 # Governed Consequence Routing
 
+![CI](https://github.com/vikramlaishram-lang/governed-consequence-routing/actions/workflows/tests.yml/badge.svg)
+
 > The model reasons. The policy decides. The record proves.
 
-This repository is a reference implementation for governed consequence routing in agentic systems.
+This repository is a local reference implementation for governed consequence routing in agentic systems.
 
 The core thesis is:
 
@@ -38,16 +40,37 @@ Trust Receipt / Audit Export / External Review
 
 4. The model reasons. The policy decides. The record proves.
 
-## Initial Public Artifacts
+## Published Artifacts
 
-This repository will publish:
+This repository currently includes:
 
-* `decision_envelope.v0.1`
-* `Promotion Contract v0.1`
-* independent envelope verification
-* proof-boundary documentation
-* valid example envelopes with real hashes
-* runtime-to-envelope promotion tools
+* `schemas/decision_envelope_v0.1.schema.json`
+* valid example decision envelopes with recomputable hashes
+* `docs/governance/promotion-contract-v0.1.md`
+* `docs/governance/decision-envelope-v0.1.md`
+* `docs/governance/current-proof-boundary.md`
+* `tools/promote_to_envelope.py`
+* `tools/verify_envelope_chain.py`
+* governance-event fixture input
+* schema, example, promoter, verifier, and mutation-detection tests
+* GitHub Actions workflow for CI verification
+
+## Proof Status
+
+This repository demonstrates:
+
+* promotion from governance events into decision envelopes
+* JSON Schema validation of `decision_envelope.v0.1`
+* recomputation of proposal, normalized-action, and record hashes
+* hash-chain verification across decision envelopes
+* constitutional invariant checks
+* mutation-tested detection of envelope tampering
+* CI verification through GitHub Actions
+
+Current proof tags:
+
+* `promotion-contract-v0.1`
+* `ci-verified-promotion-contract-v0.1`
 
 ## Proof Boundary
 
@@ -55,4 +78,6 @@ This project does not claim to solve all of AI governance.
 
 It demonstrates a local, inspectable architecture for governed consequence routing in agentic systems.
 
-Production durability, external custody, independent notarization, SSO-backed reviewer identity, and broad third-party validation remain future proof-boundary items.
+This repository does not claim production readiness, legal admissibility, third-party validation, complete AI governance coverage, external custody, independent notarization, or SSO-backed reviewer identity.
+
+Those remain future proof-boundary items.
