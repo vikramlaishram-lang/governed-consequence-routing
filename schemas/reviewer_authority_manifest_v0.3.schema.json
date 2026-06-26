@@ -1,0 +1,116 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.invalid/schemas/reviewer_authority_manifest_v0.3.schema.json",
+"title": "Reviewer Authority Manifest v0.3",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"reviewer_authority_id",
+"reviewer_identity_ref",
+"reviewer_role",
+"authority_scope",
+"valid_from",
+"valid_until",
+"issuer",
+"issuer_authority_id",
+"authority_status",
+"authority_record_hash"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "reviewer_authority_manifest.v0.3"
+},
+"reviewer_authority_id": {
+"type": "string",
+"minLength": 1
+},
+"reviewer_identity_ref": {
+"type": "string",
+"minLength": 1
+},
+"reviewer_role": {
+"type": "string",
+"minLength": 1
+},
+"authority_scope": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"allowed_consequence_classes",
+"allowed_decisions"
+],
+"properties": {
+"allowed_consequence_classes": {
+"type": "array",
+"minItems": 1,
+"uniqueItems": true,
+"items": {
+"type": "string",
+"enum": [
+"UNBOUNDED_SHELL_EXECUTION",
+"SECRET_ACCESS",
+"CREDENTIAL_EXPOSURE",
+"DATA_EXPORT",
+"EXTERNAL_COMMUNICATION",
+"PRODUCTION_STATE_CHANGE",
+"POLICY_MUTATION",
+"IDENTITY_OR_PERMISSION_CHANGE",
+"IRREVERSIBLE_DELETE",
+"CLAIM_PUBLICATION",
+"MODEL_OR_PROMPT_MODIFICATION",
+"SELF_MODIFICATION",
+"READ_ONLY_ACCESS",
+"LOCAL_COMPUTATION",
+"UNKNOWN"
+]
+}
+},
+"allowed_decisions": {
+"type": "array",
+"minItems": 1,
+"uniqueItems": true,
+"items": {
+"type": "string",
+"enum": [
+"ALLOW",
+"DENY",
+"REQUEST_REVIEW",
+"QUARANTINE"
+]
+}
+}
+}
+},
+"valid_from": {
+"type": "string",
+"format": "date-time"
+},
+"valid_until": {
+"type": "string",
+"format": "date-time"
+},
+"issuer": {
+"type": "string",
+"minLength": 1
+},
+"issuer_authority_id": {
+"type": "string",
+"minLength": 1
+},
+"authority_status": {
+"type": "string",
+"enum": [
+"ACTIVE",
+"SUSPENDED",
+"REVOKED",
+"EXPIRED"
+]
+},
+"authority_record_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+}
+}
+}

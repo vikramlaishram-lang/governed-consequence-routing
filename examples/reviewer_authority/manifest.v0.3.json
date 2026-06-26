@@ -1,0 +1,22 @@
+{
+  "schema_version": "reviewer_authority_manifest.v0.3",
+  "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001",
+  "reviewer_identity_ref": "local-demo-reviewer:release-reviewer-001",
+  "reviewer_role": "release_reviewer",
+  "authority_scope": {
+    "allowed_consequence_classes": [
+      "PRODUCTION_STATE_CHANGE",
+      "POLICY_MUTATION",
+      "CLAIM_PUBLICATION"
+    ],
+    "allowed_decisions": [
+      "REQUEST_REVIEW"
+    ]
+  },
+  "valid_from": "2026-01-01T00:00:00Z",
+  "valid_until": "2027-01-01T00:00:00Z",
+  "issuer": "local-demo-governance-admin",
+  "issuer_authority_id": "issuer-authority-demo-governance-admin-001",
+  "authority_status": "ACTIVE",
+  "authority_record_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
