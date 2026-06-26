@@ -1,0 +1,27 @@
+{
+"schema_version": "approval_token.v0.3",
+"approval_token_id": "approval-token-demo-release-review-001",
+"reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001",
+"proposal_id": "proposal-demo-production-change-001",
+"proposal_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+"normalized_action_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+"policy_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+"consequence_classification": {
+"consequence_class": "PRODUCTION_STATE_CHANGE",
+"classification_confidence": "HIGH"
+},
+"approval_scope": {
+"approved_consequence_classes": [
+"PRODUCTION_STATE_CHANGE"
+],
+"approved_decisions": [
+"REQUEST_REVIEW"
+]
+},
+"approval_decision": "APPROVED",
+"approval_reason": "Local demo approval for a bounded production-state-change review path.",
+"issued_at": "2026-06-26T00:00:00Z",
+"expires_at": "2026-06-27T00:00:00Z",
+"authority_record_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"approval_token_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

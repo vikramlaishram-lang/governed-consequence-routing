@@ -1,0 +1,169 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://example.invalid/schemas/approval_token_v0.3.schema.json",
+"title": "Approval Token v0.3",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"approval_token_id",
+"reviewer_authority_id",
+"proposal_id",
+"proposal_hash",
+"normalized_action_hash",
+"policy_hash",
+"consequence_classification",
+"approval_scope",
+"approval_decision",
+"approval_reason",
+"issued_at",
+"expires_at",
+"authority_record_hash",
+"approval_token_hash"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"const": "approval_token.v0.3"
+},
+"approval_token_id": {
+"type": "string",
+"minLength": 1
+},
+"reviewer_authority_id": {
+"type": "string",
+"minLength": 1
+},
+"proposal_id": {
+"type": "string",
+"minLength": 1
+},
+"proposal_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+},
+"normalized_action_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+},
+"policy_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+},
+"consequence_classification": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"consequence_class",
+"classification_confidence"
+],
+"properties": {
+"consequence_class": {
+"type": "string",
+"enum": [
+"UNBOUNDED_SHELL_EXECUTION",
+"SECRET_ACCESS",
+"CREDENTIAL_EXPOSURE",
+"DATA_EXPORT",
+"EXTERNAL_COMMUNICATION",
+"PRODUCTION_STATE_CHANGE",
+"POLICY_MUTATION",
+"IDENTITY_OR_PERMISSION_CHANGE",
+"IRREVERSIBLE_DELETE",
+"CLAIM_PUBLICATION",
+"MODEL_OR_PROMPT_MODIFICATION",
+"SELF_MODIFICATION",
+"READ_ONLY_ACCESS",
+"LOCAL_COMPUTATION",
+"UNKNOWN"
+]
+},
+"classification_confidence": {
+"type": "string",
+"enum": [
+"HIGH",
+"MEDIUM",
+"LOW",
+"UNCERTAIN"
+]
+}
+}
+},
+"approval_scope": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"approved_consequence_classes",
+"approved_decisions"
+],
+"properties": {
+"approved_consequence_classes": {
+"type": "array",
+"minItems": 1,
+"uniqueItems": true,
+"items": {
+"type": "string",
+"enum": [
+"UNBOUNDED_SHELL_EXECUTION",
+"SECRET_ACCESS",
+"CREDENTIAL_EXPOSURE",
+"DATA_EXPORT",
+"EXTERNAL_COMMUNICATION",
+"PRODUCTION_STATE_CHANGE",
+"POLICY_MUTATION",
+"IDENTITY_OR_PERMISSION_CHANGE",
+"IRREVERSIBLE_DELETE",
+"CLAIM_PUBLICATION",
+"MODEL_OR_PROMPT_MODIFICATION",
+"SELF_MODIFICATION",
+"READ_ONLY_ACCESS",
+"LOCAL_COMPUTATION",
+"UNKNOWN"
+]
+}
+},
+"approved_decisions": {
+"type": "array",
+"minItems": 1,
+"uniqueItems": true,
+"items": {
+"type": "string",
+"enum": [
+"ALLOW",
+"DENY",
+"REQUEST_REVIEW",
+"QUARANTINE"
+]
+}
+}
+}
+},
+"approval_decision": {
+"type": "string",
+"enum": [
+"APPROVED",
+"REJECTED"
+]
+},
+"approval_reason": {
+"type": "string",
+"minLength": 1
+},
+"issued_at": {
+"type": "string",
+"format": "date-time"
+},
+"expires_at": {
+"type": "string",
+"format": "date-time"
+},
+"authority_record_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+},
+"approval_token_hash": {
+"type": "string",
+"pattern": "^sha256:[0-9a-f]{64}$"
+}
+}
+}
