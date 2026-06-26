@@ -81,3 +81,53 @@ def test_export_verification_bundle_fails_for_missing_source(tmp_path):
 
     assert result.returncode != 0
     assert "VERIFICATION BUNDLE FAIL" in result.stderr
+
+def test_export_verification_summary_without_full_verifier_stdout(tmp_path):
+    bundle_path = tmp_path / "verification_bundle.json"
+    summary_path = tmp_path / "verification_summary.json"
+
+    result = run_command([
+        str(EXPORTER),
+        "examples",
+        "--bundle-out",
+        str(bundle_path),
+        "--summary-out",
+        str(summary_path),
+        "--mutate",
+    ])
+
+    assert result.returncode == 0, result.stderr
+    assert "VERIFICATION SUMMARY PASS" in result.stdout
+    assert summary_path.exists()
+
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+
+    assert summary["summary_version"] == "verification_summary.v0.2"
+    assert summary["verification_result"] == "PASS"
+    assert summary["mutation_check_result"] == "PASS"
+    assert summary["envelope_count"] == 3
+    assert summary["chain_head"] == summary["final_record_hash"]
+    assert summary["schema_hash"]
+    assert summary["tamper_evidence_modes"] == ["UNKEYED_HASH_CHAIN"]
+    assert "verifier_stdout" not in summary
+    assert "verifier_stderr" not in summary
+
+
+def test_export_verification_summary_prints_chain_head(tmp_path):
+    bundle_path = tmp_path / "verification_bundle.json"
+    summary_path = tmp_path / "verification_summary.json"
+
+    result = run_command([
+        str(EXPORTER),
+        "examples",
+        "--bundle-out",
+        str(bundle_path),
+        "--summary-out",
+        str(summary_path),
+        "--mutate",
+    ])
+
+    assert result.returncode == 0, result.stderr
+    assert "chain_head:" in result.stdout
+    assert "schema_hash:" in result.stdout
+    assert "tamper_evidence_modes:" in result.stdout

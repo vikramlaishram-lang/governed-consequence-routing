@@ -1,4 +1,4 @@
-﻿import argparse
+import argparse
 import hashlib
 import json
 import subprocess
@@ -8,8 +8,11 @@ from pathlib import Path
 
 
 BUNDLE_VERSION = "verification_bundle.v0.2"
+SUMMARY_VERSION = "verification_summary.v0.2"
 VERIFIER_VERSION = "decision-envelope-verifier-v0.1"
 DEFAULT_SCHEMA_PATH = Path("schemas/decision_envelope_v0.1.schema.json")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 PROOF_BOUNDARY = (
     "This verification bundle is a reproducible local custody artifact. "
     "It does not claim legal admissibility, third-party validation, external "
@@ -65,16 +68,15 @@ def run_verifier(source, mutate):
     if mutate:
         args.extend(["--mutate", "--verbose"])
 
-    result = subprocess.run(
+    return subprocess.run(
         args,
+        cwd=str(REPO_ROOT),
         text=True,
         encoding="utf-8",
         errors="replace",
         capture_output=True,
         check=False,
     )
-
-    return result
 
 
 def parse_detected_mutations(verifier_stdout):
@@ -128,7 +130,7 @@ def build_bundle(source, schema_path, mutate):
         canonical_json(envelopes).encode("utf-8")
     )
 
-    bundle = {
+    return {
         "bundle_version": BUNDLE_VERSION,
         "created_at": utc_now(),
         "verifier_version": VERIFIER_VERSION,
@@ -139,6 +141,7 @@ def build_bundle(source, schema_path, mutate):
         "envelope_count": len(envelopes),
         "first_record_hash": envelopes[0].get("record_hash"),
         "final_record_hash": envelopes[-1].get("record_hash"),
+        "chain_head": envelopes[-1].get("record_hash"),
         "tamper_evidence_modes": unique_values(envelopes, "tamper_evidence_mode"),
         "key_ids": unique_values(envelopes, "key_id"),
         "verification_result": "PASS",
@@ -152,19 +155,40 @@ def build_bundle(source, schema_path, mutate):
         "proof_boundary": PROOF_BOUNDARY,
     }
 
-    return bundle
+
+def build_summary(bundle):
+    return {
+        "summary_version": SUMMARY_VERSION,
+        "created_at": bundle["created_at"],
+        "verifier_version": bundle["verifier_version"],
+        "schema_path": bundle["schema_path"],
+        "schema_hash": bundle["schema_hash"],
+        "envelope_source": bundle["envelope_source"],
+        "envelope_source_hash": bundle["envelope_source_hash"],
+        "envelope_count": bundle["envelope_count"],
+        "first_record_hash": bundle["first_record_hash"],
+        "final_record_hash": bundle["final_record_hash"],
+        "chain_head": bundle["chain_head"],
+        "tamper_evidence_modes": bundle["tamper_evidence_modes"],
+        "key_ids": bundle["key_ids"],
+        "verification_result": bundle["verification_result"],
+        "mutation_checks_requested": bundle["mutation_checks_requested"],
+        "mutation_check_result": bundle["mutation_check_result"],
+        "detected_mutation_classes": bundle["detected_mutation_classes"],
+        "proof_boundary": bundle["proof_boundary"],
+    }
 
 
-def write_bundle(path, bundle):
+def write_json(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    payload = json.dumps(bundle, indent=2, sort_keys=True) + "\n"
+    payload = json.dumps(value, indent=2, sort_keys=True) + "\n"
     path.write_text(payload, encoding="utf-8")
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Export a v0.2 verification bundle for a decision-envelope chain."
+        description="Export v0.2 custody artifacts for a decision-envelope chain."
     )
     parser.add_argument("source", help="Envelope JSON file, JSONL file, or directory.")
     parser.add_argument(
@@ -175,7 +199,12 @@ def parse_args():
     parser.add_argument(
         "--bundle-out",
         required=True,
-        help="Output path for the verification bundle JSON.",
+        help="Output path for the full verification bundle JSON.",
+    )
+    parser.add_argument(
+        "--summary-out",
+        default=None,
+        help="Optional output path for a concise verification summary JSON.",
     )
     parser.add_argument(
         "--mutate",
@@ -194,11 +223,20 @@ def main():
             schema_path=args.schema_path,
             mutate=args.mutate,
         )
-        write_bundle(args.bundle_out, bundle)
+        write_json(args.bundle_out, bundle)
+
         print(f"VERIFICATION BUNDLE PASS: wrote {args.bundle_out}")
         print(f"envelope_count: {bundle['envelope_count']}")
-        print(f"final_record_hash: {bundle['final_record_hash']}")
+        print(f"chain_head: {bundle['chain_head']}")
+        print(f"schema_hash: {bundle['schema_hash']}")
+        print(f"tamper_evidence_modes: {', '.join(bundle['tamper_evidence_modes'])}")
         print(f"mutation_check_result: {bundle['mutation_check_result']}")
+
+        if args.summary_out:
+            summary = build_summary(bundle)
+            write_json(args.summary_out, summary)
+            print(f"VERIFICATION SUMMARY PASS: wrote {args.summary_out}")
+
         return 0
     except Exception as exc:
         print(f"VERIFICATION BUNDLE FAIL: {exc}", file=sys.stderr)
