@@ -8,3 +8,5 @@ venv/
 
 envelopes.json
 wal/
+
+verification_bundle.json
