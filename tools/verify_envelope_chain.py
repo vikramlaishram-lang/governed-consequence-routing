@@ -14,6 +14,11 @@ It checks:
 - previous_record_hash chain linkage
 - constitutional invariants
 - mutation detection
+
+v0.2.3 adds optional local HMAC custody demo verification:
+- UNKEYED_HASH_CHAIN remains the default
+- HMAC_SHA256_V1 requires key_id and environment-provided key
+- no HMAC secret is committed to the repository
 """
 
 from __future__ import annotations
@@ -21,7 +26,9 @@ from __future__ import annotations
 import argparse
 import copy
 import hashlib
+import hmac
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
@@ -31,6 +38,12 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 GENESIS_HASH = "0" * 64
 SCHEMA_PATH = Path("schemas/decision_envelope_v0.1.schema.json")
+
+UNKEYED_MODE = "UNKEYED_HASH_CHAIN"
+HMAC_MODE = "HMAC_SHA256_V1"
+
+HMAC_KEY_ENV = "GCR_HMAC_KEY"
+HMAC_KEY_ID_ENV = "GCR_HMAC_KEY_ID"
 
 
 class VerificationError(Exception):
@@ -45,10 +58,39 @@ def canonical_json(obj: Dict[str, Any]) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
+def get_hmac_key_for_envelope(envelope: Dict[str, Any]) -> bytes:
+    key_id = envelope.get("key_id")
+
+    if not key_id:
+        raise VerificationError("HMAC_KEY_ID_MISSING")
+
+    expected_key_id = os.environ.get(HMAC_KEY_ID_ENV)
+    if expected_key_id and expected_key_id != key_id:
+        raise VerificationError("HMAC_KEY_ID_MISMATCH")
+
+    key = os.environ.get(HMAC_KEY_ENV)
+    if not key:
+        raise VerificationError("HMAC_KEY_MISSING")
+
+    return key.encode("utf-8")
+
+
 def compute_record_hash(envelope: Dict[str, Any]) -> str:
     obj = copy.deepcopy(envelope)
     obj.pop("record_hash", None)
-    return sha256(canonical_json(obj))
+
+    payload = canonical_json(obj).encode("utf-8")
+    mode = envelope.get("tamper_evidence_mode", UNKEYED_MODE)
+
+    if mode == HMAC_MODE:
+        key = get_hmac_key_for_envelope(envelope)
+        digest = hmac.new(key, payload, hashlib.sha256).hexdigest()
+        return f"sha256:{digest}"
+
+    if mode == UNKEYED_MODE:
+        return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+    raise VerificationError(f"UNKNOWN_TAMPER_EVIDENCE_MODE: {mode}")
 
 
 def load_schema(schema_path: Path = SCHEMA_PATH) -> Dict[str, Any]:
@@ -146,7 +188,13 @@ def check_constitutional_invariants(envelope: Dict[str, Any]) -> None:
         raise VerificationError("REVIEW_DECISION_WITHOUT_REVIEWER_AUTHORITY")
 
 
-def verify_envelopes(envelopes: List[Dict[str, Any]], schema: Dict[str, Any]) -> None:
+def verify_envelopes(
+    envelopes: List[Dict[str, Any]],
+    schema: Dict[str, Any] | None = None,
+) -> None:
+    if schema is None:
+        schema = load_schema()
+
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
 
     for envelope in envelopes:
@@ -203,7 +251,10 @@ def mutate_envelope(envelope: Dict[str, Any], mutation_name: str) -> Dict[str, A
     raise ValueError(f"Unknown mutation: {mutation_name}")
 
 
-def run_mutation_checks(envelopes: List[Dict[str, Any]], schema: Dict[str, Any]) -> List[Tuple[str, bool, str]]:
+def run_mutation_checks(
+    envelopes: List[Dict[str, Any]],
+    schema: Dict[str, Any],
+) -> List[Tuple[str, bool, str]]:
     mutation_names = [
         "proposed_action",
         "normalized_action",
@@ -232,7 +283,10 @@ def run_mutation_checks(envelopes: List[Dict[str, Any]], schema: Dict[str, Any])
     return results
 
 
-def print_mutation_results(results: Iterable[Tuple[str, bool, str]], verbose: bool = False) -> bool:
+def print_mutation_results(
+    results: Iterable[Tuple[str, bool, str]],
+    verbose: bool = False,
+) -> bool:
     all_detected = True
 
     labels = {
