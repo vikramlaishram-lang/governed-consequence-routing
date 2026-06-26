@@ -9,7 +9,7 @@
       "REQUEST_REVIEW"
     ]
   },
-  "approval_token_hash": "sha256:fa4fefc6a23f4415b40dd03b5bb056f29ea10bbae8145838d5f57049edefe6c1",
+  "approval_token_hash": "sha256:cdfdf3dc8c78ba5eab6690201828f7aa7c23ef5fd29b36973f09ef619208d444",
   "approval_token_id": "approval-token-demo-release-review-001",
   "authority_record_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "consequence_classification": {
@@ -18,10 +18,10 @@
   },
   "expires_at": "2026-06-27T00:00:00Z",
   "issued_at": "2026-06-26T00:00:00Z",
-  "normalized_action_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-  "policy_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
-  "proposal_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-  "proposal_id": "proposal-demo-production-change-001",
+  "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+  "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+  "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+  "proposal_id": "33333333-3333-4333-8333-333333333333",
   "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001",
   "schema_version": "approval_token.v0.3"
 }
