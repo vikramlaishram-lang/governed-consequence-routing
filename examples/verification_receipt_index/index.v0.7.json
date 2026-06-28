@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-06-28T00:20:00Z",
+  "index_hash": "sha256:ec4ab3dfb958df29c05da0214999031fde663496f55442681ca866fd95337b59",
+  "index_id": "77777777-7777-4777-8777-777777777777",
+  "latest_verification_time": "2026-06-28T00:10:00Z",
+  "receipt_count": 2,
+  "receipts": [
+    {
+      "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
+      "proposal_id": "33333333-3333-4333-8333-333333333333",
+      "receipt_hash": "sha256:abd980d2c7ac825522f1caf6466667f9a2a9afb2d2b6c5ce7e73007c30320864",
+      "receipt_id": "verification-receipt-verification-bundle-33333333-3333-4333-8333-333333333333",
+      "receipt_path": "examples/verification_receipt/verification_receipt.v0.6.json",
+      "verification_status": "PASS",
+      "verified_at": "2026-06-28T00:00:00Z"
+    },
+    {
+      "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
+      "proposal_id": "33333333-3333-4333-8333-333333333333",
+      "receipt_hash": "sha256:f9214ffb70f8636134e0dccb16735576a37e7085ff34f216b0207e04b5828722",
+      "receipt_id": "verification-receipt-local-fail-fixture-v0.7",
+      "receipt_path": "examples/verification_receipt/verification_receipt.fail.v0.7.json",
+      "verification_status": "FAIL",
+      "verified_at": "2026-06-28T00:10:00Z"
+    }
+  ],
+  "schema_version": "verification_receipt_index_v0.7",
+  "status_counts": {
+    "FAIL": 1,
+    "PASS": 1
+  },
+  "updated_at": "2026-06-28T00:20:00Z"
+}
