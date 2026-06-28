@@ -1,463 +1,276 @@
-\# Current Proof Boundary
+# Current Proof Boundary
 
-## v0.5 Current Boundary
-
-The current v0.5 proof layer is Portable Verification Bundle export and verification.
-
-```text
-v0.3:
-decision envelope <-> approval token <-> reviewer authority manifest
-
-v0.4:
-decision envelope <-> evidence manifest <-> evidence items
-
-v0.5:
-portable verification bundle
-        <->
-decision envelope
-        <->
-approval token <-> reviewer authority manifest
-        <->
-evidence manifest <-> evidence items
-```
-
-v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.
-
-This remains a local reference implementation and developer starter kit. It does not claim production custody, external notarization, legal admissibility, regulatory compliance, clinical safety, financial advice suitability, enterprise compliance, or non-repudiation.
-
----
-
-## v0.4 Current Boundary
-
-The current v0.4 proof layer is Evidence Manifest Binding.
-
-```text
-v0.3:
-decision envelope <-> approval token <-> reviewer authority manifest
-
-v0.4:
-decision envelope <-> evidence manifest <-> evidence items
-```
-
-v0.4 proves that a decision envelope can be bound to a structured evidence manifest whose hash, required evidence, admissibility decision, and envelope linkage are independently verifiable under local reference conditions.
-
-This remains a local reference implementation and developer starter kit. It does not claim production compliance, legal admissibility, clinical safety, financial advice suitability, enterprise custody, SSO-backed identity, external notarization, or third-party validation.
-
----
-
-
-
-This document states what the current reference implementation proves and what it does not yet prove.
-
-
+This document states what the current Governed Consequence Routing reference implementation proves and what it does not prove.
 
 Publishing limitations is not weakness.
 
-
-
 It is part of trust architecture.
 
+---
 
+## Current Public Proof Status
 
-\---
-
-
-
-\## Current Claim
-
-
-
-This project demonstrates a local, inspectable architecture for governed consequence routing in agentic systems.
-
-
-
-The current v0.1 build focuses on:
-
-
+The current proof layer is:
 
 ```text
-
-decision\_envelope.v0.1
-
-valid example envelopes
-
-hash-linked envelope chain
-
-proof-boundary documentation
-
-independent verification path
-
+v0.6 — Verification Receipt
 ```
 
+v0.6 proves that a portable GCR bundle can be independently verified and that the verification run can be recorded as a durable local receipt.
 
-
-The project should not claim to solve all of AI governance.
-
-
-
-It should claim a bounded architectural contribution:
-
-
-
-> The unit of governance in an agentic system is the proposed consequence, not the tool call.
-
-
-
-\---
-
-
-
-\## Proven Locally
-
-
-
-The broader DRF/OMTIR prototype has demonstrated the following local governance primitives under controlled conditions:
-
-
+The current proof ladder is:
 
 ```text
+v0.3:
+decision envelope ↔ approval token ↔ reviewer authority manifest
 
-policy-bound action authorization
+v0.4:
+decision envelope ↔ evidence manifest ↔ evidence items
 
-evidence-linked claim admission
+v0.5:
+portable verification bundle
+        ↕
+decision envelope
+        ↕
+approval token ↔ reviewer authority manifest
+        ↕
+evidence manifest ↔ evidence items
 
-state-witness-bound approval tokens
-
-hash-chained WAL / envelope sequence
-
-review lifecycle with recorded transitions
-
-Trust Receipt generation
-
-local verifier checks
-
-consequence-aware governance at the tool-call boundary
-
-bounded local runtime / MCP proxy behavior
-
+v0.6:
+verification receipt
+        ↕
+portable verification bundle
+        ↕
+decision envelope
+        ↕
+approval token ↔ reviewer authority manifest
+        ↕
+evidence manifest ↔ evidence items
 ```
 
+---
 
+## v0.6 — Verification Receipt
 
-For this clean reference repository, the initial public proof surface is narrower:
+### Proof Sentence
 
+v0.6 proves that a portable GCR bundle can be independently verified and that the verification run can be recorded as a durable local receipt.
 
+### What Is Proven
 
-```text
+Under local reference conditions, v0.6 proves that:
 
-strict Decision Envelope v0.1 schema
+* a portable GCR bundle can be verified by the local ledger bundle verifier
+* the verifier can emit a durable verification receipt
+* the receipt records verifier metadata, bundle subject, schema hashes, artifact hashes, checks performed, verification results, failure reasons, proof boundary, and receipt hash
+* the receipt hash can be independently recomputed and checked
+* a standalone receipt verifier can validate the receipt schema, hash, PASS/FAIL consistency, and failure-reason rules
 
-valid example envelopes
+### What Is Not Proven
 
-real proposal\_hash values
+v0.6 does not prove:
 
-real normalized\_action\_hash values
+* correctness of the underlying AI action
+* real-world truth of the evidence
+* legal validity of the approval
+* safety of the original action
+* production custody
+* external notarization
+* legal admissibility
+* regulatory compliance
+* clinical safety
+* financial advice suitability
+* enterprise compliance
+* SSO-backed identity
+* production identity
+* non-repudiation
 
-real record\_hash values
+### Design Rule
 
-valid previous\_record\_hash chain linkage
+The receipt attests to a verification run.
 
-explicit proof boundary
+It does not re-authorize the original action.
 
-```
+It does not replace the bundle.
 
+It does not create legal or compliance status.
 
+A verification receipt is evidence of verification, not evidence of correctness.
 
-\---
+---
 
+## v0.5 — Portable Verification Bundle
 
+### Proof Sentence
 
-\## Not Yet Proven
+v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.
 
+### What Is Proven
 
+Under local reference conditions, v0.5 proves that:
 
-The current v0.1 build does not yet prove:
+* a decision envelope, approval token, reviewer authority manifest, evidence manifest, and evidence items can be packaged into a portable verification bundle
+* artifact hashes can be recomputed and checked
+* schema hashes can be checked using canonical parsed JSON hashing
+* verification results can be included in the bundle
+* proof-boundary metadata can travel with the bundle
+* the bundle can be independently verified locally
 
+### What Is Not Proven
 
+v0.5 does not prove:
 
-```text
+* production custody
+* external notarization
+* legal admissibility
+* regulatory compliance
+* clinical safety
+* financial advice suitability
+* enterprise compliance
+* SSO-backed identity
+* production identity
+* non-repudiation
 
-production durability beyond local filesystem
+---
 
-durable key management and rotation
+## v0.4 — Evidence Manifest Binding
 
-independent custody of audit records
+### Proof Sentence
 
-independent third-party validation
+v0.4 proves that a decision envelope can be bound to a structured evidence manifest whose hash, required evidence, admissibility decision, and envelope linkage are independently verifiable under local reference conditions.
 
-real-world adversarial robustness
+### What Is Proven
 
-broad agent-framework integration
+Under local reference conditions, v0.4 proves that:
 
-SSO/OIDC reviewer identity
+* a decision envelope can reference a structured evidence manifest
+* the evidence manifest hash can be recomputed and checked
+* required evidence can be represented explicitly
+* evidence admissibility can be recorded
+* envelope-to-manifest linkage can be independently verified
 
-external timestamping or notarization
+### What Is Not Proven
 
-public protocol adoption by external systems
+v0.4 does not prove:
 
-full cross-session policy induction
+* real-world truth of the evidence
+* external evidence custody
+* production compliance
+* legal admissibility
+* clinical safety
+* financial advice suitability
+* enterprise custody
+* SSO-backed identity
+* external notarization
+* third-party validation
 
-complete cognitive-layer governance
+---
 
-formal legal admissibility
+## v0.3 — Reviewer Authority Binding
 
-regulator approval
+### Proof Sentence
 
-```
+v0.3 proves that a decision envelope can be bound to an approval token and reviewer authority manifest under local reference conditions.
 
+### What Is Proven
 
+Under local reference conditions, v0.3 proves that:
 
-These are not defects in the claim.
+* an approval token can be represented as a structured artifact
+* a reviewer authority manifest can define reviewer scope
+* an approval token can be bound to reviewer authority
+* a decision envelope can be bound to the approval token
+* the approval chain can be locally verified
 
+### What Is Not Proven
 
+v0.3 does not prove:
 
-They define the current proof boundary.
+* SSO-backed reviewer identity
+* production identity
+* legal signature validity
+* production custody
+* enterprise compliance
+* external notarization
+* non-repudiation
 
+---
 
+## Local Reference Implementation Boundary
 
-\---
+The current implementation remains a local reference implementation and developer starter kit.
 
+It uses local schemas, local examples, local hash computation, local verification tools, and local test fixtures.
 
+It does not observe or guarantee:
 
-\## Local MVP Conditions
+* external infrastructure state
+* production reviewer identity
+* real-world legal authority
+* real-world evidence truth
+* external audit custody
+* external timestamping
+* regulatory acceptance
+* adversarial robustness in production environments
 
+---
 
-
-The current work should be understood under local MVP conditions:
-
-
-
-```text
-
-local filesystem storage
-
-local schema validation
-
-local example generation
-
-local hash computation
-
-local chain verification
-
-local policy placeholder hash
-
-local reviewer identity model
-
-no external custody
-
-no external timestamp anchor
-
-no production key management
-
-no third-party audit
-
-```
-
-
-
-\---
-
-
-
-\## What Closes Each Gap
-
-
-
-| Gap                         | Closes With                                                                |
-
-| --------------------------- | -------------------------------------------------------------------------- |
-
-| WAL / envelope durability   | S3, blob storage, or append-only storage adapter                           |
-
-| Reviewer identity           | OIDC / SSO-backed reviewer identity                                        |
-
-| Key management              | KMS-backed HMAC signing and key rotation                                   |
-
-| Independent custody         | External log sink or third-party audit store                               |
-
-| External timestamping       | Merkle epoch roots with timestamp authority or public anchor               |
-
-| Third-party validation      | Independent reproducibility run                                            |
-
-| Agent-framework integration | SDK adapters for MCP, OpenAI Agents SDK, LangGraph, AutoGen, or equivalent |
-
-| Runtime-to-record bridge    | Promotion Contract v0.1 and promoter tool                                  |
-
-| Independent proof           | verify\_envelope\_chain.py with mutation detection                           |
-
-| Public protocol maturity    | External implementers and stable schema versioning                         |
-
-
-
-\---
-
-
-
-\## Current GO / NO-GO Boundary
-
-
-
-The project should not publish strong claims until the following passes:
-
-
-
-```powershell
-
-python tools/promote\_to\_envelope.py wal/ollama-events.jsonl -o envelopes.json --verify
-
-python tools/verify\_envelope\_chain.py envelopes.json --mutate --verbose
-
-```
-
-
-
-Required mutation-detection output:
-
-
-
-```text
-
-proposed\_action mutation:           DETECTED
-
-normalized\_action mutation:         DETECTED
-
-decision mutation:                  DETECTED
-
-previous\_record\_hash mutation:      DETECTED
-
-record\_hash mutation:               DETECTED
-
-classification\_confidence mutation: DETECTED
-
-consequence\_class mutation:         DETECTED
-
-execution\_status mutation:          DETECTED
-
-```
-
-
-
-If any mutation survives:
-
-
-
-```text
-
-NO COMMIT
-
-NO TAG
-
-NO PUBLIC CLAIM
-
-```
-
-
-
-\---
-
-
-
-\## Acceptable Public Claim Today
-
-
+## Acceptable Public Claim
 
 Acceptable:
 
-
-
-> This repository defines a local reference architecture for governed consequence routing in agentic systems.
-
-
+> Governed Consequence Routing is a local reference implementation for generating and verifying governance records around AI-agent actions.
 
 Acceptable:
 
-
-
-> Decision Envelope v0.1 records proposed AI-agent consequences, policy decisions, evidence state, review state, execution boundaries, outcomes, and hash-chain linkage.
-
-
+> GCR creates and verifies portable governance records for AI-agent actions, binding proposal, authority, evidence, decision, and proof boundary into an inspectable record.
 
 Acceptable:
 
+> v0.6 adds a verification receipt that records a local verifier run over a portable GCR bundle.
 
-
-> The current implementation demonstrates local schema validation and hash-linked example records.
-
-
-
-Not acceptable yet:
-
-
+Not acceptable:
 
 > This system solves AI governance.
 
-
-
-Not acceptable yet:
-
-
+Not acceptable:
 
 > This system is production-ready.
 
-
-
-Not acceptable yet:
-
-
+Not acceptable:
 
 > This system is legally admissible by default.
 
+Not acceptable:
 
+> This system proves the underlying AI action was correct or safe.
 
-Not acceptable yet:
-
-
+Not acceptable:
 
 > This system replaces AI GRC platforms.
 
+---
 
-
-\---
-
-
-
-\## Final Boundary
-
-
+## Final Boundary
 
 The current project is strong because it makes its proof boundary explicit.
 
+The current build is not a full governance platform.
 
-
-The immediate build is not a full governance platform.
-
-
-
-It is the inspectable core:
-
-
+It is the inspectable core of a governance-record system:
 
 ```text
-
-decision\_envelope.v0.1
-
-\+
-
-Promotion Contract v0.1
-
-\+
-
-Independent Envelope Verifier
-
-\+
-
-real WAL proof
-
+decision envelope
++
+reviewer authority binding
++
+evidence manifest binding
++
+portable verification bundle
++
+verification receipt
++
+local verifiers
 ```
 
-
-
-That is enough for the clean build.
-
-
-
+That is the current proof boundary.
