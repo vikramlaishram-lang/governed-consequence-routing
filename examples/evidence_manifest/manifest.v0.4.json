@@ -1,0 +1,65 @@
+{
+  "admissibility_decision": "SUFFICIENT",
+  "created_at": "2026-06-28T10:00:00Z",
+  "evidence_items": [
+    {
+      "admissibility_status": "ADMITTED",
+      "collected_at": "2026-06-28T09:40:00Z",
+      "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "evidence_id": "evidence-test-result-001",
+      "evidence_type": "TEST_RESULT",
+      "relevance": "REQUIRED",
+      "source_ref": "pytest:78-passed",
+      "source_type": "SYSTEM_CAPTURE"
+    },
+    {
+      "admissibility_status": "ADMITTED",
+      "collected_at": "2026-06-28T09:45:00Z",
+      "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "evidence_id": "evidence-release-notes-v0-3",
+      "evidence_type": "RELEASE_NOTE",
+      "relevance": "REQUIRED",
+      "source_ref": "RELEASE_NOTES_v0.3.md",
+      "source_type": "LOCAL_FILE"
+    },
+    {
+      "admissibility_status": "ADMITTED",
+      "collected_at": "2026-06-28T09:50:00Z",
+      "content_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "evidence_id": "evidence-governance-standard-001",
+      "evidence_type": "POLICY_DOCUMENT",
+      "relevance": "SUPPORTING",
+      "source_ref": "docs/standard",
+      "source_type": "LOCAL_FILE"
+    },
+    {
+      "admissibility_status": "ADMITTED",
+      "collected_at": "2026-06-28T09:55:00Z",
+      "content_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "evidence_id": "evidence-reviewer-authority-001",
+      "evidence_type": "REVIEW_RECORD",
+      "relevance": "SUPPORTING",
+      "source_ref": "examples/reviewer_authority/manifest.v0.3.json",
+      "source_type": "LOCAL_FILE"
+    }
+  ],
+  "evidence_manifest_hash": "sha256:e64be551264744d01b568d5459658d5d6d88a4109fa03c521f1de8d6ba91e2c7",
+  "evidence_manifest_id": "evidence-manifest-demo-release-readiness-001",
+  "evidence_requirements": {
+    "minimum_admitted_items": 2,
+    "required_evidence_types": [
+      "TEST_RESULT",
+      "RELEASE_NOTE"
+    ]
+  },
+  "evidence_scope": {
+    "claim_type": "RELEASE_READINESS_CLAIM",
+    "consequence_class": "CLAIM_PUBLICATION",
+    "operational_use": "RELEASE_WORKFLOW"
+  },
+  "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+  "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+  "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+  "proposal_id": "33333333-3333-4333-8333-333333333333",
+  "schema_version": "evidence_manifest.v0.4"
+}
