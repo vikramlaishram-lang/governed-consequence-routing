@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vikramlaishram-lang/governed-consequence-routing/schemas/verification_bundle_v0.5.schema.json",
+  "title": "Verification Bundle v0.5",
+  "description": "A portable local verification bundle for governed AI decision artifacts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "created_at",
+    "bundle_type",
+    "bundle_subject",
+    "artifacts",
+    "artifact_hashes",
+    "verification_results",
+    "proof_boundary",
+    "bundle_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "verification_bundle.v0.5"
+    },
+    "bundle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bundle_type": {
+      "type": "string",
+      "enum": [
+        "GOVERNED_DECISION_BUNDLE",
+        "AUTHORITY_BINDING_BUNDLE",
+        "EVIDENCE_BINDING_BUNDLE",
+        "FULL_GCR_BUNDLE"
+      ]
+    },
+    "bundle_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proposal_id",
+        "proposal_hash",
+        "normalized_action_hash",
+        "policy_hash",
+        "decision",
+        "review_status",
+        "admissibility_decision"
+      ],
+      "properties": {
+        "proposal_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "proposal_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "normalized_action_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "policy_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "ALLOW",
+            "DENY",
+            "REQUEST_REVIEW",
+            "QUARANTINE"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "NOT_REQUIRED",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "EXPIRED",
+            "INVALIDATED"
+          ]
+        },
+        "admissibility_decision": {
+          "type": "string",
+          "enum": [
+            "SUFFICIENT",
+            "INSUFFICIENT",
+            "PARTIAL",
+            "NOT_REQUIRED"
+          ]
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_envelope",
+        "approval_token",
+        "reviewer_authority_manifest",
+        "evidence_manifest"
+      ],
+      "properties": {
+        "decision_envelope": {
+          "type": "object"
+        },
+        "approval_token": {
+          "type": "object"
+        },
+        "reviewer_authority_manifest": {
+          "type": "object"
+        },
+        "evidence_manifest": {
+          "type": "object"
+        }
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_envelope_hash",
+        "approval_token_hash",
+        "reviewer_authority_manifest_hash",
+        "evidence_manifest_hash",
+        "decision_envelope_schema_hash",
+        "approval_token_schema_hash",
+        "reviewer_authority_manifest_schema_hash",
+        "evidence_manifest_schema_hash"
+      ],
+      "properties": {
+        "decision_envelope_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "approval_token_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "reviewer_authority_manifest_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "evidence_manifest_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "decision_envelope_schema_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "approval_token_schema_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "reviewer_authority_manifest_schema_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "evidence_manifest_schema_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "verification_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_token_verification",
+        "reviewer_authority_binding_verification",
+        "evidence_manifest_binding_verification",
+        "bundle_hash_verification"
+      ],
+      "properties": {
+        "approval_token_verification": {
+          "$ref": "#/$defs/verification_result"
+        },
+        "reviewer_authority_binding_verification": {
+          "$ref": "#/$defs/verification_result"
+        },
+        "evidence_manifest_binding_verification": {
+          "$ref": "#/$defs/verification_result"
+        },
+        "bundle_hash_verification": {
+          "$ref": "#/$defs/verification_result"
+        }
+      }
+    },
+    "proof_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation_status",
+        "claims",
+        "non_claims"
+      ],
+      "properties": {
+        "implementation_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "non_claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "bundle_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "verification_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "verifier",
+        "checked_at",
+        "details"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_RUN"
+          ]
+        },
+        "verifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "details": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
