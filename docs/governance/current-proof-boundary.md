@@ -1,5 +1,23 @@
 \# Current Proof Boundary
 
+## v0.4 Current Boundary
+
+The current v0.4 proof layer is Evidence Manifest Binding.
+
+```text
+v0.3:
+decision envelope <-> approval token <-> reviewer authority manifest
+
+v0.4:
+decision envelope <-> evidence manifest <-> evidence items
+```
+
+v0.4 proves that a decision envelope can be bound to a structured evidence manifest whose hash, required evidence, admissibility decision, and envelope linkage are independently verifiable under local reference conditions.
+
+This remains a local reference implementation and developer starter kit. It does not claim production compliance, legal admissibility, clinical safety, financial advice suitability, enterprise custody, SSO-backed identity, external notarization, or third-party validation.
+
+---
+
 
 
 This document states what the current reference implementation proves and what it does not yet prove.
