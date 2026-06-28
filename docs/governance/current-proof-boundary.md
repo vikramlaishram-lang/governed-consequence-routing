@@ -1,5 +1,32 @@
 \# Current Proof Boundary
 
+## v0.5 Current Boundary
+
+The current v0.5 proof layer is Portable Verification Bundle export and verification.
+
+```text
+v0.3:
+decision envelope <-> approval token <-> reviewer authority manifest
+
+v0.4:
+decision envelope <-> evidence manifest <-> evidence items
+
+v0.5:
+portable verification bundle
+        <->
+decision envelope
+        <->
+approval token <-> reviewer authority manifest
+        <->
+evidence manifest <-> evidence items
+```
+
+v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.
+
+This remains a local reference implementation and developer starter kit. It does not claim production custody, external notarization, legal admissibility, regulatory compliance, clinical safety, financial advice suitability, enterprise compliance, or non-repudiation.
+
+---
+
 ## v0.4 Current Boundary
 
 The current v0.4 proof layer is Evidence Manifest Binding.

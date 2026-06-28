@@ -173,7 +173,7 @@
       "valid_until": "2027-01-01T00:00:00Z"
     }
   },
-  "bundle_hash": "sha256:b5ab046c6ba66ff1b594109ade39f23bc002309f05351adcbaf3130f0d8dd0e5",
+  "bundle_hash": "sha256:4ad9204a8d56fa576b226b78c0e42fb624c92f81fde7089a124fd12fa53bcf2d",
   "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
   "bundle_subject": {
     "admissibility_decision": "SUFFICIENT",
@@ -185,7 +185,7 @@
     "review_status": "PENDING"
   },
   "bundle_type": "FULL_GCR_BUNDLE",
-  "created_at": "2026-06-28T07:10:42Z",
+  "created_at": "2026-06-28T07:12:58Z",
   "proof_boundary": {
     "claims": [
       "v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.",
@@ -207,7 +207,7 @@
   "schema_version": "verification_bundle.v0.5",
   "verification_results": {
     "approval_token_verification": {
-      "checked_at": "2026-06-28T07:10:42Z",
+      "checked_at": "2026-06-28T07:12:58Z",
       "details": {
         "approval_token_id": "approval-token-demo-release-review-001"
       },
@@ -215,7 +215,7 @@
       "verifier": "tools/verify_approval_token.py"
     },
     "bundle_hash_verification": {
-      "checked_at": "2026-06-28T07:10:42Z",
+      "checked_at": "2026-06-28T07:12:58Z",
       "details": {
         "bundle_hash_verification": "computed during export"
       },
@@ -223,7 +223,7 @@
       "verifier": "tools/verify_ledger_bundle.py"
     },
     "evidence_manifest_binding_verification": {
-      "checked_at": "2026-06-28T07:10:42Z",
+      "checked_at": "2026-06-28T07:12:58Z",
       "details": {
         "evidence_manifest_id": "evidence-manifest-demo-release-readiness-001"
       },
@@ -231,7 +231,7 @@
       "verifier": "tools/verify_evidence_manifest_binding.py"
     },
     "reviewer_authority_binding_verification": {
-      "checked_at": "2026-06-28T07:10:42Z",
+      "checked_at": "2026-06-28T07:12:58Z",
       "details": {
         "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001"
       },
