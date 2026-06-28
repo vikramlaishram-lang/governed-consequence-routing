@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vikramlaishram-lang/governed-consequence-routing/schemas/verification_receipt_index_v0.7.schema.json",
+  "title": "Verification Receipt Index v0.7",
+  "description": "A local index of verification receipt membership and recorded receipt status.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "index_id",
+    "schema_version",
+    "created_at",
+    "updated_at",
+    "receipt_count",
+    "receipts",
+    "status_counts",
+    "latest_verification_time",
+    "index_hash"
+  ],
+  "properties": {
+    "index_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "verification_receipt_index_v0.7"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receipt_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "receipt_id",
+          "receipt_hash",
+          "bundle_id",
+          "proposal_id",
+          "verification_status",
+          "verified_at",
+          "receipt_path"
+        ],
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "receipt_hash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "bundle_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "proposal_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL"
+            ]
+          },
+          "verified_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "receipt_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "status_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "PASS",
+        "FAIL"
+      ],
+      "properties": {
+        "PASS": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "FAIL": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "latest_verification_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "index_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}
