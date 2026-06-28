@@ -1,0 +1,105 @@
+{
+  "artifact_hashes_checked": {
+    "approval_token_hash": "sha256:dd71b645576b42fd188fe653eee70f5fb2ef11d180364039188817455470e28f",
+    "decision_envelope_hash": "sha256:8093295aa2189001e550a590bcb9050ca74da58b1c54baaf556d941769bf4c6d",
+    "evidence_manifest_hash": "sha256:10835c5e3313e1fd0f5bc64be491c706c46f5c471fde230f45f7b062bf5b8b13",
+    "reviewer_authority_manifest_hash": "sha256:a53b3f54c14ac0602a8855f62a3c863c80326191623219a13a2100baa14f50aa"
+  },
+  "bundle_subject": {
+    "bundle_hash": "sha256:2504d839d6651fad4dc7a6c5bd9c78f94883b479cc110ac5acc6963687ba1cef",
+    "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
+    "bundle_path_or_subject": "examples/verification_bundle/full_gcr_bundle.v0.5.json",
+    "bundle_type": "FULL_GCR_BUNDLE",
+    "proposal_id": "33333333-3333-4333-8333-333333333333"
+  },
+  "checks_performed": [
+    "verification_bundle_schema_valid",
+    "bundle_hash_matches",
+    "artifact_hashes_match",
+    "schema_hashes_match",
+    "embedded_approval_token_verifies",
+    "reviewer_authority_binding_verifies",
+    "evidence_manifest_binding_verifies",
+    "bundle_subject_matches_embedded_artifacts",
+    "recorded_verification_results_are_pass"
+  ],
+  "created_at": "2026-06-28T00:00:00Z",
+  "failure_reasons": [],
+  "overall_status": "PASS",
+  "proof_boundary": {
+    "boundary_type": "local reference implementation and developer starter kit",
+    "claims": [
+      "v0.6 proves that a portable GCR bundle can be independently verified and that the verification run can be recorded as a durable local receipt.",
+      "The receipt attests to a verification run.",
+      "A verification receipt is evidence of verification, not evidence of correctness."
+    ],
+    "non_claims": [
+      "re-authorization of the original action",
+      "replacement of the portable verification bundle",
+      "legal or compliance status",
+      "production custody",
+      "external notarization",
+      "legal admissibility",
+      "regulatory compliance",
+      "clinical safety",
+      "financial advice suitability",
+      "enterprise compliance",
+      "SSO-backed identity",
+      "production identity",
+      "non-repudiation"
+    ]
+  },
+  "receipt_hash": "sha256:abd980d2c7ac825522f1caf6466667f9a2a9afb2d2b6c5ce7e73007c30320864",
+  "receipt_id": "verification-receipt-verification-bundle-33333333-3333-4333-8333-333333333333",
+  "receipt_schema_version": "verification_receipt_v0.6",
+  "schema_hashes_checked": {
+    "approval_token_schema_hash": "sha256:cc4a54c752453273c0093ac61f517c9c7131ebac63662b0b3a026e971a510168",
+    "decision_envelope_schema_hash": "sha256:11c6df8459550b314f6f014b05d238279b40669a6926a394ea3590688d0fdf92",
+    "evidence_manifest_schema_hash": "sha256:6f33cfb01c0c5af84c6476332cf4041cf8ae0f9334fe0e669e4640788855dacc",
+    "reviewer_authority_manifest_schema_hash": "sha256:ea3082560cf0db532c55f60e92688d29dea484094928e8340d866bf52042a81d"
+  },
+  "verification_results": {
+    "artifact_hashes_match": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "bundle_hash_matches": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "bundle_subject_matches_embedded_artifacts": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "embedded_approval_token_verifies": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "evidence_manifest_binding_verifies": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "recorded_verification_results_are_pass": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "reviewer_authority_binding_verifies": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "schema_hashes_match": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    },
+    "verification_bundle_schema_valid": {
+      "message": "Check completed successfully.",
+      "status": "PASS"
+    }
+  },
+  "verifier": {
+    "verification_command": "tools/verify_ledger_bundle.py examples/verification_bundle/full_gcr_bundle.v0.5.json --receipt-out examples/verification_receipt/verification_receipt.v0.6.json",
+    "verification_tool": "tools/verify_ledger_bundle.py",
+    "verifier_name": "gcr-ledger-bundle-verifier",
+    "verifier_version": "v0.6"
+  }
+}

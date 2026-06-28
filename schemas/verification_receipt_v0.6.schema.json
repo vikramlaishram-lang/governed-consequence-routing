@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vikramlaishram-lang/governed-consequence-routing/schemas/verification_receipt_v0.6.schema.json",
+  "title": "Verification Receipt v0.6",
+  "description": "A durable local receipt attesting to one verification run over a portable GCR bundle.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_schema_version",
+    "receipt_id",
+    "created_at",
+    "verifier",
+    "bundle_subject",
+    "schema_hashes_checked",
+    "artifact_hashes_checked",
+    "checks_performed",
+    "verification_results",
+    "overall_status",
+    "failure_reasons",
+    "proof_boundary",
+    "receipt_hash"
+  ],
+  "properties": {
+    "receipt_schema_version": {
+      "type": "string",
+      "const": "verification_receipt_v0.6"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verifier_name",
+        "verifier_version",
+        "verification_tool",
+        "verification_command"
+      ],
+      "properties": {
+        "verifier_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verifier_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_command": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "bundle_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundle_id",
+        "bundle_hash",
+        "bundle_type",
+        "proposal_id",
+        "bundle_path_or_subject"
+      ],
+      "properties": {
+        "bundle_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bundle_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "bundle_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposal_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "bundle_path_or_subject": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "schema_hashes_checked": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^sha256:[a-f0-9]{64}$"
+      }
+    },
+    "artifact_hashes_checked": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^sha256:[a-f0-9]{64}$"
+      }
+    },
+    "checks_performed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "verification_results": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/verification_result"
+      }
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "failure_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "proof_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_type",
+        "claims",
+        "non_claims"
+      ],
+      "properties": {
+        "boundary_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "non_claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "receipt_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "verification_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "message"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
