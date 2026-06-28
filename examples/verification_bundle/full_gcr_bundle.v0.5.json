@@ -1,0 +1,242 @@
+{
+  "artifact_hashes": {
+    "approval_token_hash": "sha256:dd71b645576b42fd188fe653eee70f5fb2ef11d180364039188817455470e28f",
+    "approval_token_schema_hash": "sha256:12fbb30d51f6b5363f69e02bebca3f5da70f8dc85fdeb4b0d94f72681e4aa035",
+    "decision_envelope_hash": "sha256:8093295aa2189001e550a590bcb9050ca74da58b1c54baaf556d941769bf4c6d",
+    "decision_envelope_schema_hash": "sha256:9f353ad3571d1b2d6a5265bacd6df59c7030844b5a74f23bb9615b46bd6398fc",
+    "evidence_manifest_hash": "sha256:10835c5e3313e1fd0f5bc64be491c706c46f5c471fde230f45f7b062bf5b8b13",
+    "evidence_manifest_schema_hash": "sha256:ef81490984797fee21470a2261d766035f8071aadae524df39b5ef7c0990a67e",
+    "reviewer_authority_manifest_hash": "sha256:a53b3f54c14ac0602a8855f62a3c863c80326191623219a13a2100baa14f50aa",
+    "reviewer_authority_manifest_schema_hash": "sha256:882fd23ed6b3c340d3e0b00c7c951a385c87d0b3b0d3698f3605a9136c018d80"
+  },
+  "artifacts": {
+    "approval_token": {
+      "approval_decision": "APPROVED",
+      "approval_reason": "Local demo approval for a bounded production-state-change review path.",
+      "approval_scope": {
+        "approved_consequence_classes": [
+          "PRODUCTION_STATE_CHANGE"
+        ],
+        "approved_decisions": [
+          "REQUEST_REVIEW"
+        ]
+      },
+      "approval_token_hash": "sha256:cdfdf3dc8c78ba5eab6690201828f7aa7c23ef5fd29b36973f09ef619208d444",
+      "approval_token_id": "approval-token-demo-release-review-001",
+      "authority_record_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "consequence_classification": {
+        "classification_confidence": "HIGH",
+        "consequence_class": "PRODUCTION_STATE_CHANGE"
+      },
+      "expires_at": "2026-06-27T00:00:00Z",
+      "issued_at": "2026-06-26T00:00:00Z",
+      "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+      "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+      "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+      "proposal_id": "33333333-3333-4333-8333-333333333333",
+      "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001",
+      "schema_version": "approval_token.v0.3"
+    },
+    "decision_envelope": {
+      "agent_id": "reference-agent",
+      "agent_identity_manifest_hash": null,
+      "approval_expiry": null,
+      "approval_scope": null,
+      "consequence_classification": {
+        "authority_required": "REVIEWER",
+        "blast_radius": "ORGANIZATION",
+        "classification_confidence": "HIGH",
+        "classification_method": "DETERMINISTIC_RULE",
+        "consequence_class": "CLAIM_PUBLICATION",
+        "evidence_required": "EVIDENCE_MANIFEST",
+        "reversibility": "PARTIALLY_REVERSIBLE",
+        "risk_level": "HIGH"
+      },
+      "created_at": "2026-06-28T10:05:00Z",
+      "decision": "REQUEST_REVIEW",
+      "decision_basis": "POLICY_RULE",
+      "decision_engine_version": "drf-omtir-decision-engine-v0.1",
+      "decision_reason": "Release-readiness claim requires an evidence manifest before operational admission.",
+      "evidence_manifest_hash": "sha256:e64be551264744d01b568d5459658d5d6d88a4109fa03c521f1de8d6ba91e2c7",
+      "evidence_references": [
+        "evidence-manifest-demo-release-readiness-001"
+      ],
+      "execution_boundary": "NOT_EXECUTED",
+      "execution_status": "PENDING",
+      "failure_mode": null,
+      "key_id": null,
+      "normalized_action": "publish_release_readiness_claim:v0.3-starter-kit",
+      "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+      "outcome_hash": null,
+      "outcome_status": "PENDING_REVIEW",
+      "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+      "policy_rule_id": "require-evidence-manifest-for-release-readiness-claim",
+      "policy_version": "policy-v0.1-local-demo",
+      "previous_record_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+      "proposal_id": "33333333-3333-4333-8333-333333333333",
+      "proposed_action": "publish release-readiness claim for v0.3 starter kit",
+      "record_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "review_status": "PENDING",
+      "reviewer_authority_id": null,
+      "runtime_id": "local-reference-runtime-v0.1",
+      "schema_version": "decision_envelope_v0.1",
+      "state_witness_hash": null,
+      "tamper_evidence_mode": "UNKEYED_HASH_CHAIN",
+      "verifier_version": "decision-envelope-verifier-v0.1"
+    },
+    "evidence_manifest": {
+      "admissibility_decision": "SUFFICIENT",
+      "created_at": "2026-06-28T10:00:00Z",
+      "evidence_items": [
+        {
+          "admissibility_status": "ADMITTED",
+          "collected_at": "2026-06-28T09:40:00Z",
+          "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "evidence_id": "evidence-test-result-001",
+          "evidence_type": "TEST_RESULT",
+          "relevance": "REQUIRED",
+          "source_ref": "pytest:78-passed",
+          "source_type": "SYSTEM_CAPTURE"
+        },
+        {
+          "admissibility_status": "ADMITTED",
+          "collected_at": "2026-06-28T09:45:00Z",
+          "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "evidence_id": "evidence-release-notes-v0-3",
+          "evidence_type": "RELEASE_NOTE",
+          "relevance": "REQUIRED",
+          "source_ref": "RELEASE_NOTES_v0.3.md",
+          "source_type": "LOCAL_FILE"
+        },
+        {
+          "admissibility_status": "ADMITTED",
+          "collected_at": "2026-06-28T09:50:00Z",
+          "content_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "evidence_id": "evidence-governance-standard-001",
+          "evidence_type": "POLICY_DOCUMENT",
+          "relevance": "SUPPORTING",
+          "source_ref": "docs/standard",
+          "source_type": "LOCAL_FILE"
+        },
+        {
+          "admissibility_status": "ADMITTED",
+          "collected_at": "2026-06-28T09:55:00Z",
+          "content_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+          "evidence_id": "evidence-reviewer-authority-001",
+          "evidence_type": "REVIEW_RECORD",
+          "relevance": "SUPPORTING",
+          "source_ref": "examples/reviewer_authority/manifest.v0.3.json",
+          "source_type": "LOCAL_FILE"
+        }
+      ],
+      "evidence_manifest_hash": "sha256:e64be551264744d01b568d5459658d5d6d88a4109fa03c521f1de8d6ba91e2c7",
+      "evidence_manifest_id": "evidence-manifest-demo-release-readiness-001",
+      "evidence_requirements": {
+        "minimum_admitted_items": 2,
+        "required_evidence_types": [
+          "TEST_RESULT",
+          "RELEASE_NOTE"
+        ]
+      },
+      "evidence_scope": {
+        "claim_type": "RELEASE_READINESS_CLAIM",
+        "consequence_class": "CLAIM_PUBLICATION",
+        "operational_use": "RELEASE_WORKFLOW"
+      },
+      "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+      "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+      "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+      "proposal_id": "33333333-3333-4333-8333-333333333333",
+      "schema_version": "evidence_manifest.v0.4"
+    },
+    "reviewer_authority_manifest": {
+      "authority_record_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "authority_scope": {
+        "allowed_consequence_classes": [
+          "PRODUCTION_STATE_CHANGE",
+          "POLICY_MUTATION",
+          "CLAIM_PUBLICATION"
+        ],
+        "allowed_decisions": [
+          "REQUEST_REVIEW"
+        ]
+      },
+      "authority_status": "ACTIVE",
+      "issuer": "local-demo-governance-admin",
+      "issuer_authority_id": "issuer-authority-demo-governance-admin-001",
+      "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001",
+      "reviewer_identity_ref": "local-demo-reviewer:release-reviewer-001",
+      "reviewer_role": "release_reviewer",
+      "schema_version": "reviewer_authority_manifest.v0.3",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": "2027-01-01T00:00:00Z"
+    }
+  },
+  "bundle_hash": "sha256:b5ab046c6ba66ff1b594109ade39f23bc002309f05351adcbaf3130f0d8dd0e5",
+  "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
+  "bundle_subject": {
+    "admissibility_decision": "SUFFICIENT",
+    "decision": "REQUEST_REVIEW",
+    "normalized_action_hash": "sha256:3d81dd77ac00b5787b364dd2cabe01a3bc8d3e4aff2c0bf3668874471afb2449",
+    "policy_hash": "sha256:217237882b90a783d7a14646aaf59cdcedeb8a8994eec282533f7f290ac5d9df",
+    "proposal_hash": "sha256:5a5079faac653a59456fbd3b2a22b7d973cfd105aac421a17ea5ead66247faff",
+    "proposal_id": "33333333-3333-4333-8333-333333333333",
+    "review_status": "PENDING"
+  },
+  "bundle_type": "FULL_GCR_BUNDLE",
+  "created_at": "2026-06-28T07:10:42Z",
+  "proof_boundary": {
+    "claims": [
+      "v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.",
+      "A bundle packages local verification material for independent inspection.",
+      "The source of truth remains the included structured artifacts and their hashes, not the human-readable summary."
+    ],
+    "implementation_status": "local reference implementation and developer starter kit",
+    "non_claims": [
+      "production custody",
+      "external notarization",
+      "legal admissibility",
+      "regulatory compliance",
+      "clinical safety",
+      "financial advice suitability",
+      "enterprise compliance",
+      "non-repudiation"
+    ]
+  },
+  "schema_version": "verification_bundle.v0.5",
+  "verification_results": {
+    "approval_token_verification": {
+      "checked_at": "2026-06-28T07:10:42Z",
+      "details": {
+        "approval_token_id": "approval-token-demo-release-review-001"
+      },
+      "status": "PASS",
+      "verifier": "tools/verify_approval_token.py"
+    },
+    "bundle_hash_verification": {
+      "checked_at": "2026-06-28T07:10:42Z",
+      "details": {
+        "bundle_hash_verification": "computed during export"
+      },
+      "status": "PASS",
+      "verifier": "tools/verify_ledger_bundle.py"
+    },
+    "evidence_manifest_binding_verification": {
+      "checked_at": "2026-06-28T07:10:42Z",
+      "details": {
+        "evidence_manifest_id": "evidence-manifest-demo-release-readiness-001"
+      },
+      "status": "PASS",
+      "verifier": "tools/verify_evidence_manifest_binding.py"
+    },
+    "reviewer_authority_binding_verification": {
+      "checked_at": "2026-06-28T07:10:42Z",
+      "details": {
+        "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001"
+      },
+      "status": "PASS",
+      "verifier": "tools/verify_reviewer_authority_binding.py"
+    }
+  }
+}
