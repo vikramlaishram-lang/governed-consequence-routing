@@ -1,13 +1,13 @@
 {
   "artifact_hashes": {
     "approval_token_hash": "sha256:dd71b645576b42fd188fe653eee70f5fb2ef11d180364039188817455470e28f",
-    "approval_token_schema_hash": "sha256:12fbb30d51f6b5363f69e02bebca3f5da70f8dc85fdeb4b0d94f72681e4aa035",
+    "approval_token_schema_hash": "sha256:cc4a54c752453273c0093ac61f517c9c7131ebac63662b0b3a026e971a510168",
     "decision_envelope_hash": "sha256:8093295aa2189001e550a590bcb9050ca74da58b1c54baaf556d941769bf4c6d",
-    "decision_envelope_schema_hash": "sha256:9f353ad3571d1b2d6a5265bacd6df59c7030844b5a74f23bb9615b46bd6398fc",
+    "decision_envelope_schema_hash": "sha256:11c6df8459550b314f6f014b05d238279b40669a6926a394ea3590688d0fdf92",
     "evidence_manifest_hash": "sha256:10835c5e3313e1fd0f5bc64be491c706c46f5c471fde230f45f7b062bf5b8b13",
-    "evidence_manifest_schema_hash": "sha256:ef81490984797fee21470a2261d766035f8071aadae524df39b5ef7c0990a67e",
+    "evidence_manifest_schema_hash": "sha256:6f33cfb01c0c5af84c6476332cf4041cf8ae0f9334fe0e669e4640788855dacc",
     "reviewer_authority_manifest_hash": "sha256:a53b3f54c14ac0602a8855f62a3c863c80326191623219a13a2100baa14f50aa",
-    "reviewer_authority_manifest_schema_hash": "sha256:882fd23ed6b3c340d3e0b00c7c951a385c87d0b3b0d3698f3605a9136c018d80"
+    "reviewer_authority_manifest_schema_hash": "sha256:ea3082560cf0db532c55f60e92688d29dea484094928e8340d866bf52042a81d"
   },
   "artifacts": {
     "approval_token": {
@@ -173,7 +173,7 @@
       "valid_until": "2027-01-01T00:00:00Z"
     }
   },
-  "bundle_hash": "sha256:4ad9204a8d56fa576b226b78c0e42fb624c92f81fde7089a124fd12fa53bcf2d",
+  "bundle_hash": "sha256:2504d839d6651fad4dc7a6c5bd9c78f94883b479cc110ac5acc6963687ba1cef",
   "bundle_id": "verification-bundle-33333333-3333-4333-8333-333333333333",
   "bundle_subject": {
     "admissibility_decision": "SUFFICIENT",
@@ -185,7 +185,7 @@
     "review_status": "PENDING"
   },
   "bundle_type": "FULL_GCR_BUNDLE",
-  "created_at": "2026-06-28T07:12:58Z",
+  "created_at": "2026-06-28T07:19:34Z",
   "proof_boundary": {
     "claims": [
       "v0.5 proves that a governed AI decision can be exported into a portable verification bundle whose included artifacts, hashes, verification results, and proof-boundary metadata are independently inspectable and locally verifiable.",
@@ -207,7 +207,7 @@
   "schema_version": "verification_bundle.v0.5",
   "verification_results": {
     "approval_token_verification": {
-      "checked_at": "2026-06-28T07:12:58Z",
+      "checked_at": "2026-06-28T07:19:34Z",
       "details": {
         "approval_token_id": "approval-token-demo-release-review-001"
       },
@@ -215,7 +215,7 @@
       "verifier": "tools/verify_approval_token.py"
     },
     "bundle_hash_verification": {
-      "checked_at": "2026-06-28T07:12:58Z",
+      "checked_at": "2026-06-28T07:19:34Z",
       "details": {
         "bundle_hash_verification": "computed during export"
       },
@@ -223,7 +223,7 @@
       "verifier": "tools/verify_ledger_bundle.py"
     },
     "evidence_manifest_binding_verification": {
-      "checked_at": "2026-06-28T07:12:58Z",
+      "checked_at": "2026-06-28T07:19:34Z",
       "details": {
         "evidence_manifest_id": "evidence-manifest-demo-release-readiness-001"
       },
@@ -231,7 +231,7 @@
       "verifier": "tools/verify_evidence_manifest_binding.py"
     },
     "reviewer_authority_binding_verification": {
-      "checked_at": "2026-06-28T07:12:58Z",
+      "checked_at": "2026-06-28T07:19:34Z",
       "details": {
         "reviewer_authority_id": "reviewer-authority-demo-release-reviewer-001"
       },

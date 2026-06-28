@@ -70,8 +70,9 @@ def sha256_text(text: str) -> str:
     return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def sha256_file(path: Path) -> str:
-    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+def sha256_schema_file(path: Path) -> str:
+    schema = load_json(path)
+    return sha256_text(canonical_json(schema))
 
 
 def compute_artifact_hash(value: Dict[str, Any]) -> str:
@@ -200,10 +201,10 @@ def build_bundle(
             "approval_token_hash": compute_artifact_hash(approval_token),
             "reviewer_authority_manifest_hash": compute_artifact_hash(reviewer_manifest),
             "evidence_manifest_hash": compute_artifact_hash(evidence_manifest),
-            "decision_envelope_schema_hash": sha256_file(DECISION_ENVELOPE_SCHEMA_PATH),
-            "approval_token_schema_hash": sha256_file(APPROVAL_TOKEN_SCHEMA_PATH),
-            "reviewer_authority_manifest_schema_hash": sha256_file(REVIEWER_AUTHORITY_SCHEMA_PATH),
-            "evidence_manifest_schema_hash": sha256_file(EVIDENCE_MANIFEST_SCHEMA_PATH),
+            "decision_envelope_schema_hash": sha256_schema_file(DECISION_ENVELOPE_SCHEMA_PATH),
+            "approval_token_schema_hash": sha256_schema_file(APPROVAL_TOKEN_SCHEMA_PATH),
+            "reviewer_authority_manifest_schema_hash": sha256_schema_file(REVIEWER_AUTHORITY_SCHEMA_PATH),
+            "evidence_manifest_schema_hash": sha256_schema_file(EVIDENCE_MANIFEST_SCHEMA_PATH),
         },
         "verification_results": {
             "approval_token_verification": verification_result(
