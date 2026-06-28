@@ -1,4 +1,4 @@
-# Current Proof Boundary
+﻿# Current Proof Boundary
 
 This document states what the current Governed Consequence Routing reference implementation proves and what it does not prove.
 
@@ -60,30 +60,30 @@ v0.6 proves that a portable GCR bundle can be independently verified and that th
 
 Under local reference conditions, v0.6 proves that:
 
-* a portable GCR bundle can be verified by the local ledger bundle verifier
-* the verifier can emit a durable verification receipt
-* the receipt records verifier metadata, bundle subject, schema hashes, artifact hashes, checks performed, verification results, failure reasons, proof boundary, and receipt hash
-* the receipt hash can be independently recomputed and checked
-* a standalone receipt verifier can validate the receipt schema, hash, PASS/FAIL consistency, and failure-reason rules
+- a portable GCR bundle can be verified by the local ledger bundle verifier
+- the verifier can emit a durable verification receipt
+- the receipt records verifier metadata, bundle subject, schema hashes, artifact hashes, checks performed, verification results, failure reasons, proof boundary, and receipt hash
+- the receipt hash can be independently recomputed and checked
+- a standalone receipt verifier can validate the receipt schema, hash, PASS/FAIL consistency, and failure-reason rules
 
 ### What Is Not Proven
 
 v0.6 does not prove:
 
-* correctness of the underlying AI action
-* real-world truth of the evidence
-* legal validity of the approval
-* safety of the original action
-* production custody
-* external notarization
-* legal admissibility
-* regulatory compliance
-* clinical safety
-* financial advice suitability
-* enterprise compliance
-* SSO-backed identity
-* production identity
-* non-repudiation
+- correctness of the underlying AI action
+- real-world truth of the evidence
+- legal validity of the approval
+- safety of the original action
+- production custody
+- external notarization
+- legal admissibility
+- regulatory compliance
+- clinical safety
+- financial advice suitability
+- enterprise compliance
+- SSO-backed identity
+- production identity
+- non-repudiation
 
 ### Design Rule
 
@@ -109,27 +109,27 @@ v0.5 proves that a governed AI decision can be exported into a portable verifica
 
 Under local reference conditions, v0.5 proves that:
 
-* a decision envelope, approval token, reviewer authority manifest, evidence manifest, and evidence items can be packaged into a portable verification bundle
-* artifact hashes can be recomputed and checked
-* schema hashes can be checked using canonical parsed JSON hashing
-* verification results can be included in the bundle
-* proof-boundary metadata can travel with the bundle
-* the bundle can be independently verified locally
+- a decision envelope, approval token, reviewer authority manifest, evidence manifest, and evidence items can be packaged into a portable verification bundle
+- artifact hashes can be recomputed and checked
+- schema hashes can be checked using canonical parsed JSON hashing
+- verification results can be included in the bundle
+- proof-boundary metadata can travel with the bundle
+- the bundle can be independently verified locally
 
 ### What Is Not Proven
 
 v0.5 does not prove:
 
-* production custody
-* external notarization
-* legal admissibility
-* regulatory compliance
-* clinical safety
-* financial advice suitability
-* enterprise compliance
-* SSO-backed identity
-* production identity
-* non-repudiation
+- production custody
+- external notarization
+- legal admissibility
+- regulatory compliance
+- clinical safety
+- financial advice suitability
+- enterprise compliance
+- SSO-backed identity
+- production identity
+- non-repudiation
 
 ---
 
@@ -143,26 +143,26 @@ v0.4 proves that a decision envelope can be bound to a structured evidence manif
 
 Under local reference conditions, v0.4 proves that:
 
-* a decision envelope can reference a structured evidence manifest
-* the evidence manifest hash can be recomputed and checked
-* required evidence can be represented explicitly
-* evidence admissibility can be recorded
-* envelope-to-manifest linkage can be independently verified
+- a decision envelope can reference a structured evidence manifest
+- the evidence manifest hash can be recomputed and checked
+- required evidence can be represented explicitly
+- evidence admissibility can be recorded
+- envelope-to-manifest linkage can be independently verified
 
 ### What Is Not Proven
 
 v0.4 does not prove:
 
-* real-world truth of the evidence
-* external evidence custody
-* production compliance
-* legal admissibility
-* clinical safety
-* financial advice suitability
-* enterprise custody
-* SSO-backed identity
-* external notarization
-* third-party validation
+- real-world truth of the evidence
+- external evidence custody
+- production compliance
+- legal admissibility
+- clinical safety
+- financial advice suitability
+- enterprise custody
+- SSO-backed identity
+- external notarization
+- third-party validation
 
 ---
 
@@ -176,23 +176,23 @@ v0.3 proves that a decision envelope can be bound to an approval token and revie
 
 Under local reference conditions, v0.3 proves that:
 
-* an approval token can be represented as a structured artifact
-* a reviewer authority manifest can define reviewer scope
-* an approval token can be bound to reviewer authority
-* a decision envelope can be bound to the approval token
-* the approval chain can be locally verified
+- an approval token can be represented as a structured artifact
+- a reviewer authority manifest can define reviewer scope
+- an approval token can be bound to reviewer authority
+- a decision envelope can be bound to the approval token
+- the approval chain can be locally verified
 
 ### What Is Not Proven
 
 v0.3 does not prove:
 
-* SSO-backed reviewer identity
-* production identity
-* legal signature validity
-* production custody
-* enterprise compliance
-* external notarization
-* non-repudiation
+- SSO-backed reviewer identity
+- production identity
+- legal signature validity
+- production custody
+- enterprise compliance
+- external notarization
+- non-repudiation
 
 ---
 
@@ -204,14 +204,14 @@ It uses local schemas, local examples, local hash computation, local verificatio
 
 It does not observe or guarantee:
 
-* external infrastructure state
-* production reviewer identity
-* real-world legal authority
-* real-world evidence truth
-* external audit custody
-* external timestamping
-* regulatory acceptance
-* adversarial robustness in production environments
+- external infrastructure state
+- production reviewer identity
+- real-world legal authority
+- real-world evidence truth
+- external audit custody
+- external timestamping
+- regulatory acceptance
+- adversarial robustness in production environments
 
 ---
 
