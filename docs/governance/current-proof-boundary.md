@@ -13,10 +13,10 @@ It is part of trust architecture.
 The current proof layer is:
 
 ```text
-v0.6 — Verification Receipt
+v0.7 — Verification Receipt Index
 ```
 
-v0.6 proves that a portable GCR bundle can be independently verified and that the verification run can be recorded as a durable local receipt.
+v0.7 proves that multiple verification receipts can be collected into a local receipt index whose membership and integrity are independently verifiable.
 
 The current proof ladder is:
 
@@ -36,6 +36,19 @@ approval token ↔ reviewer authority manifest
         ↕
 evidence manifest ↔ evidence items
 
+v0.7:
+verification receipt index
+        ↕
+verification receipt
+        ↕
+portable verification bundle
+        ↕
+decision envelope
+        ↕
+approval token ↔ reviewer authority manifest
+        ↕
+evidence manifest ↔ evidence items
+
 v0.6:
 verification receipt
         ↕
@@ -46,6 +59,65 @@ decision envelope
 approval token ↔ reviewer authority manifest
         ↕
 evidence manifest ↔ evidence items
+```
+
+---
+
+## v0.7 — Verification Receipt Index
+
+### Proof Sentence
+
+v0.7 proves that multiple verification receipts can be collected into a local receipt index whose membership and integrity are independently verifiable.
+
+### What Is Proven
+
+Under local reference conditions, v0.7 proves that:
+
+- multiple verification receipts can be represented as index entries
+- receipt membership can be recorded in a local index
+- PASS and FAIL receipt status counts can be checked against indexed entries
+- latest verification time can be checked against indexed entries
+- the index hash can be recomputed and checked
+- receipt entry mutations can be detected by the index hash
+
+### What Is Not Proven
+
+v0.7 does not prove:
+
+- that the index re-verifies the receipts it indexes
+- that index membership proves receipt validity
+- that receipt validity proves real-world correctness
+- correctness of the underlying AI action
+- real-world truth of the evidence
+- legal validity of the approval
+- safety of the original action
+- production custody
+- external notarization
+- legal admissibility
+- regulatory compliance
+- clinical safety
+- financial advice suitability
+- enterprise compliance
+- SSO-backed identity
+- production identity
+- non-repudiation
+
+### Design Rule
+
+The index records receipt membership and the recorded status at the time the receipt was added.
+
+The index does not re-verify the receipts it indexes.
+
+Index integrity is not the same as receipt validity.
+
+Receipt validity is not the same as real-world correctness.
+
+### Proof Distinction
+
+```text
+index_hash proves:   the membership of this index has not changed
+receipt_hash proves: this specific receipt has not been modified
+verifier proves:     the receipt was valid when it was verified
 ```
 
 ---
@@ -227,7 +299,15 @@ Acceptable:
 
 Acceptable:
 
+> v0.7 adds a local verification receipt index whose membership and integrity can be independently verified.
+
+Acceptable:
+
 > v0.6 adds a verification receipt that records a local verifier run over a portable GCR bundle.
+
+Not acceptable:
+
+> Index membership proves receipt validity or real-world correctness.
 
 Not acceptable:
 
@@ -269,6 +349,8 @@ evidence manifest binding
 portable verification bundle
 +
 verification receipt
++
+verification receipt index
 +
 local verifiers
 ```
