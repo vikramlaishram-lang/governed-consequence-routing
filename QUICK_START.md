@@ -1,6 +1,25 @@
-# Governed Consequence Routing — AI Agent Approval Record Starter Kit
+# Governed Consequence Routing — AI Agent Governance Record Starter Kit
 
-This starter kit is a local reference implementation for creating and verifying AI agent approval records.
+This starter kit is a local reference implementation for creating, binding, exporting, and locally verifying approval records around AI-agent actions.
+
+## Proof Ladder
+
+```text
+v0.3:
+decision envelope <-> approval token <-> reviewer authority manifest
+
+v0.4:
+decision envelope <-> evidence manifest <-> evidence items
+
+v0.5:
+portable verification bundle
+        <->
+decision envelope
+        <->
+approval token <-> reviewer authority manifest
+        <->
+evidence manifest <-> evidence items
+```
 
 ## Requirements
 
@@ -28,7 +47,7 @@ python -m pytest -q
 Expected result:
 
 ```text
-78 passed
+107 passed
 ```
 
 ## Verify the Approval Token
@@ -67,8 +86,44 @@ Expected result:
 DECISION ENVELOPE APPROVAL BINDING VERIFY PASS
 ```
 
+## Verify Evidence Manifest Binding
+
+```powershell
+python .\tools\verify_evidence_manifest_binding.py --envelope .\examples\evidence_manifest\evidence_bound_decision_envelope.v0.4.json --manifest .\examples\evidence_manifest\manifest.v0.4.json
+```
+
+Expected result:
+
+```text
+EVIDENCE MANIFEST BINDING VERIFY PASS
+```
+
+## Export a Ledger Bundle
+
+```powershell
+python .\tools\export_ledger_bundle.py --envelope .\examples\evidence_manifest\evidence_bound_decision_envelope.v0.4.json --approval-token .\examples\reviewer_authority\approval_token.v0.3.json --reviewer-manifest .\examples\reviewer_authority\manifest.v0.3.json --evidence-manifest .\examples\evidence_manifest\manifest.v0.4.json --out .\examples\verification_bundle\full_gcr_bundle.v0.5.json --write-hash
+```
+
+Expected result:
+
+```text
+LEDGER BUNDLE EXPORT PASS
+```
+
+## Verify the Ledger Bundle
+
+```powershell
+python .\tools\verify_ledger_bundle.py .\examples\verification_bundle\full_gcr_bundle.v0.5.json
+```
+
+Expected result:
+
+```text
+LEDGER BUNDLE VERIFY PASS
+```
+
 ## Proof Boundary
 
-Governed Consequence Routing — AI Agent Approval Record Starter Kit is a local reference implementation and developer starter kit.
+Governed Consequence Routing — AI Agent Governance Record Starter Kit is a local reference implementation and developer starter kit.
 
-It does not claim production identity, SSO-backed approval, legal signature validity, enterprise compliance, legal admissibility, clinical safety, financial advice suitability, or regulatory compliance.
+It does not claim production custody, external notarization, legal admissibility, regulatory compliance, clinical safety, financial advice suitability, enterprise compliance, SSO-backed identity, production identity, or non-repudiation.
