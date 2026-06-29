@@ -234,11 +234,22 @@ def validate_schema(graph: Dict[str, Any], schema: Dict[str, Any]) -> None:
         )
 
 
-def artifact_hash(relative_path: str) -> str:
+def artifact_bytes(relative_path: str) -> bytes:
     path = REPO_ROOT / relative_path
     if not path.exists():
         raise GovernanceRecordGraphBuildError(f"SOURCE_ARTIFACT_NOT_FOUND: {relative_path}")
-    return sha256_bytes(path.read_bytes())
+
+    raw = path.read_bytes()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return raw
+
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
+def artifact_hash(relative_path: str) -> str:
+    return sha256_bytes(artifact_bytes(relative_path))
 
 
 def source_artifacts() -> List[Dict[str, Any]]:

@@ -111,6 +111,16 @@ def load_schema(path: Path = SCHEMA_PATH) -> Dict[str, Any]:
     return schema
 
 
+def source_artifact_bytes(path: Path) -> bytes:
+    raw = path.read_bytes()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return raw
+
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
 def check_schema(graph: Dict[str, Any], schema: Dict[str, Any]) -> None:
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
     errors = sorted(validator.iter_errors(graph), key=lambda error: error.path)
@@ -158,7 +168,7 @@ def verify_source_artifacts(graph: Dict[str, Any]) -> None:
             raise GovernanceRecordGraphVerificationError(
                 f"SOURCE_ARTIFACT_NOT_FOUND: {relative_path}"
             )
-        actual_hash = sha256_bytes(path.read_bytes())
+        actual_hash = sha256_bytes(source_artifact_bytes(path))
         if actual_hash != artifact["sha256"]:
             raise GovernanceRecordGraphVerificationError(
                 f"SOURCE_ARTIFACT_HASH_MISMATCH: {relative_path}"

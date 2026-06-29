@@ -252,7 +252,7 @@
       "to_node": "runtime-proposal-001"
     }
   ],
-  "graph_hash": "sha256:b9543aa42e9462f60182c4cd191f4691052d7c8c1f6f070bc6c9a0a852540ab1",
+  "graph_hash": "sha256:82dc0d3c11dd8c5767a10910c33440bcdf60be380bf76378ddfe747c4c11c29a",
   "graph_id": "10101010-1010-4010-8010-101010101010",
   "nodes": [
     {
@@ -398,61 +398,61 @@
       "artifact_id": "runtime-proposal-v0.9",
       "artifact_type": "RUNTIME_PROPOSAL",
       "path": "examples/runtime_proposal/proposal.v0.9.json",
-      "sha256": "sha256:918695e00a62a103aedf46eab2ca9608edb4ab39f99d8d971c869dfdc4329333"
+      "sha256": "sha256:51c43959a6e57c76a75016c6cecf8d52f433517f9175f1b628eb6e91743f0533"
     },
     {
       "artifact_id": "approval-token-v0.3",
       "artifact_type": "APPROVAL_TOKEN",
       "path": "examples/reviewer_authority/approval_token.v0.3.json",
-      "sha256": "sha256:a846cf859c03b36b0a089cd618a73b26eaf06bfcb66f2b2e9feb76cb49ccaa69"
+      "sha256": "sha256:2740916fb7759950f349b769f1601e6540913f7a3507d240d585fa7a02931976"
     },
     {
       "artifact_id": "reviewer-authority-manifest-v0.3",
       "artifact_type": "REVIEWER_AUTHORITY_MANIFEST",
       "path": "examples/reviewer_authority/manifest.v0.3.json",
-      "sha256": "sha256:90e9b4d8b7d18b946d96de0f070562ce766df01735eb08302699ac8a70a6ee82"
+      "sha256": "sha256:dd8828e137d14b3713a5fddcf60ed08a57e94e977fd126a599d888c5226ec3ff"
     },
     {
       "artifact_id": "approved-decision-envelope-v0.3",
       "artifact_type": "DECISION_ENVELOPE",
       "path": "examples/reviewer_authority/approved_decision_envelope.v0.3.json",
-      "sha256": "sha256:79ab7d9a4e5452cd22664094517ee9926d415cb50aa2e46ee69effdf32e6ab24"
+      "sha256": "sha256:3c27973c65512ae43024f733c762d42c0629c7f797ef63fdf6e2fda293ffbc3e"
     },
     {
       "artifact_id": "evidence-manifest-v0.4",
       "artifact_type": "EVIDENCE_MANIFEST",
       "path": "examples/evidence_manifest/manifest.v0.4.json",
-      "sha256": "sha256:ffa3dc2b896ba50bbe4697d9c1c473455075a44b42a54a153040845e7f620d05"
+      "sha256": "sha256:9cb475d4b9db63e5254154833f99d733419670e2c1ae4c88347d8956e7e865dd"
     },
     {
       "artifact_id": "evidence-bound-decision-envelope-v0.4",
       "artifact_type": "DECISION_ENVELOPE",
       "path": "examples/evidence_manifest/evidence_bound_decision_envelope.v0.4.json",
-      "sha256": "sha256:f82a1a47fbeb29d0c433dd6040b7c80f6134d32e3527601c323400ca4b97d9f8"
+      "sha256": "sha256:edd98f260c424a4974fe7c6c3e04def3c4f012d7cc7e93b7b67a3746fd457dfc"
     },
     {
       "artifact_id": "verification-bundle-v0.5",
       "artifact_type": "VERIFICATION_BUNDLE",
       "path": "examples/verification_bundle/full_gcr_bundle.v0.5.json",
-      "sha256": "sha256:79bb1b292dbf7cac5cc466b5b72e2ab096f4e4e97414249a6f36b7fec6927195"
+      "sha256": "sha256:8b3400983dc0f9165c731d5de1fbe35f40ba98d54ce3c2f22e8070aafb8f394d"
     },
     {
       "artifact_id": "verification-receipt-v0.6",
       "artifact_type": "VERIFICATION_RECEIPT",
       "path": "examples/verification_receipt/verification_receipt.v0.6.json",
-      "sha256": "sha256:3f35940357a1ed115bceb8f044e3cdb398914c2bd6be55fc58104f8fc3e8fbb3"
+      "sha256": "sha256:183e6111c70522ff043d56657c3fdb033c82e888070585093b334f0a1e41e996"
     },
     {
       "artifact_id": "receipt-index-v0.7",
       "artifact_type": "RECEIPT_INDEX",
       "path": "examples/verification_receipt_index/index.v0.7.json",
-      "sha256": "sha256:b197dde7bd2b3b8a69805d715769de15ea6aadd77b0c335ebd34be62416f4455"
+      "sha256": "sha256:c37d997b4390e23ce90bcae381c687ede31ff245ff4f3625a0c793fcfb151311"
     },
     {
       "artifact_id": "local-verifier-ui-v0.8",
       "artifact_type": "LOCAL_VERIFIER_UI",
       "path": "tools/local_verifier_ui.py",
-      "sha256": "sha256:99163ffba0f09a9869fd2e76c5d7cac0b81aeb3ecad00e5413a4dd8a288f96a0"
+      "sha256": "sha256:d2383da7d9e0632f97d6eae82b60de118a345800cca24c2befb37deaeb17b38b"
     }
   ],
   "verifier_results": [
