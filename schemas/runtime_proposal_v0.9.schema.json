@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vikramlaishram-lang/governed-consequence-routing/schemas/runtime_proposal_v0.9.schema.json",
+  "title": "Runtime Proposal v0.9",
+  "description": "A governed proposal record captured before execution without granting execution authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposal_id",
+    "schema_version",
+    "created_at",
+    "agent_id",
+    "source",
+    "proposed_action",
+    "proposed_action_hash",
+    "normalized_consequence",
+    "normalized_consequence_hash",
+    "consequence_classification",
+    "consequence_risk",
+    "execution_status",
+    "authorization_status",
+    "proof_boundary",
+    "record_hash"
+  ],
+  "properties": {
+    "proposal_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "runtime_proposal_v0.9"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "source_id"
+      ],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "SIMULATED_AGENT",
+            "LOCAL_FIXTURE",
+            "TEST_HARNESS"
+          ]
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "proposed_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_type",
+        "target",
+        "intent"
+      ],
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "proposed_action_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "normalized_consequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "consequence_type",
+        "normalized_target",
+        "consequence_summary"
+      ],
+      "properties": {
+        "consequence_type": {
+          "type": "string",
+          "enum": [
+            "READ_ONLY_ACCESS",
+            "FILE_WRITE",
+            "FILE_DELETE",
+            "SECRET_ACCESS",
+            "EXTERNAL_COMMUNICATION",
+            "PRODUCTION_STATE_CHANGE",
+            "POLICY_MUTATION",
+            "IDENTITY_OR_PERMISSION_CHANGE",
+            "UNKNOWN"
+          ]
+        },
+        "normalized_target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "consequence_summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "normalized_consequence_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "consequence_classification": {
+      "type": "string",
+      "enum": [
+        "READ_ONLY_ACCESS",
+        "FILE_WRITE",
+        "FILE_DELETE",
+        "SECRET_ACCESS",
+        "EXTERNAL_COMMUNICATION",
+        "PRODUCTION_STATE_CHANGE",
+        "POLICY_MUTATION",
+        "IDENTITY_OR_PERMISSION_CHANGE",
+        "UNKNOWN"
+      ]
+    },
+    "consequence_risk": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL",
+        "UNKNOWN"
+      ]
+    },
+    "execution_status": {
+      "type": "string",
+      "const": "NOT_EXECUTED"
+    },
+    "authorization_status": {
+      "type": "string",
+      "enum": [
+        "NOT_AUTHORIZED",
+        "REQUIRES_GOVERNANCE"
+      ]
+    },
+    "proof_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proves",
+        "does_not_prove"
+      ],
+      "properties": {
+        "proves": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "does_not_prove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "record_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}
