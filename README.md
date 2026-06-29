@@ -4,46 +4,46 @@
 
 Governed Consequence Routing is a local reference implementation for generating and verifying governance records around AI-agent actions.
 
-It demonstrates how consequential AI proposals can be represented as inspectable records that bind proposal, authority, evidence, decision, verification, receipt history, receipt-index membership, interface exposure, and proof boundary.
+It demonstrates how consequential AI proposals can be captured before execution and represented as inspectable records that bind proposal capture, authority, evidence, decision, verification, receipt history, receipt-index membership, local interface exposure, and proof boundary.
 
 ---
 
 ## Current Release
 
 ```text
-Governed Consequence Routing v0.8 — Local Verifier UI
-```
-
-Expected local test result:
-
-```text
-161 passed
-```
-
-Current proof ladder:
-
-```text
-v0.3 -> v0.4 -> v0.5 -> v0.6 -> v0.7 -> v0.8
+Governed Consequence Routing v0.9 -- Runtime Proposal Hook
 ```
 
 Current release tag:
 
 ```text
-v0.8-local-verifier-ui
+v0.9-runtime-proposal-hook
 ```
 
-Current v0.8 proof sentence:
+Expected local test result:
 
 ```text
-Existing GCR verification results can be exposed through a local human-facing interface without changing verification semantics.
+191 passed
 ```
 
-Core v0.8 boundary:
+Current proof ladder:
 
 ```text
-The UI is interface exposure only.
-It does not create new governance authority.
-If CLI verification and UI verification disagree, v0.8 fails.
+v0.3 -> v0.4 -> v0.5 -> v0.6 -> v0.7 -> v0.8 -> v0.9
+```
+
+Current v0.9 proof sentence:
+
+```text
+v0.9 proves that a live or simulated AI-agent proposal can be captured before execution and converted into a governed proposal record without granting execution authority.
+```
+
+Core v0.9 boundary:
+
+```text
+v0.9 proves proposal capture.
+v0.9 does not prove execution authority.
+If a runtime proposal hook causes execution, v0.9 fails.
 ```
 
 ---
@@ -53,12 +53,12 @@ If CLI verification and UI verification disagree, v0.8 fails.
 Current proof layer:
 
 ```text
-v0.8 — Local Verifier UI
+v0.9 -- Runtime Proposal Hook
 ```
 
-v0.8 proves that existing GCR verification results can be exposed through a local human-facing interface without changing verification semantics.
+The runtime proposal hook may capture, normalize, classify, and emit a governed proposal record.
 
-The UI may display existing verifier results. It may not create new verification semantics, new approvals, new decisions, new receipts, new indexes, runtime hooks, upload persistence, production custody, legal/compliance status, or correctness claims.
+It may not authorize execution, execute tools, call external systems, mutate governance artifacts, create approvals, create receipts, create indexes, create bundles, or bypass existing verifier logic.
 
 ---
 
@@ -130,15 +130,27 @@ verification receipt
         ^
         |
 portable verification bundle
+
+v0.9:
+runtime proposal hook
+        |
+        v
+captured proposal
+        |
+        v
+normalized consequence
+        |
+        v
+governance record input
+        |
+        v
+existing verifier tools
         ^
         |
-decision envelope
+verification receipt index
         ^
         |
-approval token <-> reviewer authority manifest
-        ^
-        |
-evidence manifest <-> evidence items
+local verifier UI
 ```
 
 ---
@@ -149,6 +161,8 @@ This repository contains a local developer reference implementation for **Verifi
 
 Core artifacts include:
 
+* runtime proposal schema and fixture
+* runtime proposal capture tool
 * decision envelope examples
 * reviewer authority manifest
 * approval token example
@@ -158,11 +172,12 @@ Core artifacts include:
 * verification receipt index example
 * local verifier UI
 * CLI/UI semantic parity tests
+* runtime proposal non-execution tests
 * JSON schemas
 * local verification tools
 * governance documentation
 * release notes through v0.7
-* v0.8 release notes in the GitHub Release for tag `v0.8-local-verifier-ui`
+* v0.8 and v0.9 release notes in GitHub Releases
 * buyer/developer quick start
 * test suite
 
@@ -173,12 +188,12 @@ The repository is intended to make the governance record chain inspectable, test
 ## Core Pattern
 
 ```text
-Generate -> classify -> evidence-bind -> authorize -> record -> verify -> receipt -> index -> expose through local UI
+Capture proposal -> normalize consequence -> classify -> evidence-bind -> authorize -> record -> verify -> receipt -> index -> expose through local UI
 ```
 
 The system does not treat model output as authority.
 
-It records proposed consequences, binds them to policy, evidence, reviewer authority, verification results, verification receipts, receipt-index membership, interface exposure, and proof-boundary metadata.
+It captures proposed consequences before execution, then binds them to policy, evidence, reviewer authority, verification results, verification receipts, receipt-index membership, interface exposure, and proof-boundary metadata.
 
 ---
 
@@ -188,6 +203,7 @@ It records proposed consequences, binds them to policy, evidence, reviewer autho
 
 * `docs/standard/GCR_BEHAVIORAL_STANDARD_v0.1.md`
 * `docs/governance/current-proof-boundary.md`
+* `docs/governance/runtime-proposal-hook-v0.9.md`
 * `docs/governance/local-verifier-ui-v0.8.md`
 * `docs/governance/verification-receipt-index-v0.7.md`
 * `docs/governance/verification-receipt-v0.6.md`
@@ -202,11 +218,9 @@ It records proposed consequences, binds them to policy, evidence, reviewer autho
 * `RELEASE_NOTES_v0.6.md`
 * `RELEASE_NOTES_v0.7.md`
 
-v0.8 release notes are published in the GitHub Release for tag:
+v0.8 release notes are published in the GitHub Release for tag `v0.8-local-verifier-ui`.
 
-```text
-v0.8-local-verifier-ui
-```
+v0.9 release notes are published in the GitHub Release for tag `v0.9-runtime-proposal-hook`.
 
 ### Schemas
 
@@ -217,6 +231,7 @@ v0.8-local-verifier-ui
 * `schemas/verification_bundle_v0.5.schema.json`
 * `schemas/verification_receipt_v0.6.schema.json`
 * `schemas/verification_receipt_index_v0.7.schema.json`
+* `schemas/runtime_proposal_v0.9.schema.json`
 
 ### Examples
 
@@ -229,9 +244,11 @@ v0.8-local-verifier-ui
 * `examples/verification_receipt/verification_receipt.v0.6.json`
 * `examples/verification_receipt/verification_receipt.fail.v0.7.json`
 * `examples/verification_receipt_index/index.v0.7.json`
+* `examples/runtime_proposal/proposal.v0.9.json`
 
-### Verification Tools
+### Verification and Capture Tools
 
+* `tools/capture_runtime_proposal.py`
 * `tools/verify_approval_token.py`
 * `tools/verify_reviewer_authority_binding.py`
 * `tools/verify_decision_envelope_approval_binding.py`
@@ -244,7 +261,10 @@ v0.8-local-verifier-ui
 
 ### Tests
 
+* `tests/test_runtime_proposal_hook.py`
 * `tests/test_local_verifier_ui.py`
+
+The v0.9 runtime proposal tests verify proposal capture, schema validation, proposed-action hash verification, normalized-consequence hash verification, record hash verification, non-execution, authorization boundary behavior, failure-closed behavior, and artifact non-mutation.
 
 The v0.8 UI tests verify CLI/UI semantic parity, hard fail behavior, unknown verifier rejection, fixture non-mutation, no upload storage, no new governance artifacts, FAIL-not-promoted behavior, forbidden overclaim language checks, and primary output parity.
 
@@ -270,7 +290,19 @@ python -m pytest -q
 Expected result:
 
 ```text
-161 passed
+191 passed
+```
+
+Run the v0.9 runtime proposal tests:
+
+```powershell
+python -m pytest tests/test_runtime_proposal_hook.py -q
+```
+
+Expected result:
+
+```text
+30 passed
 ```
 
 Run the v0.8 local verifier UI tests:
@@ -288,6 +320,44 @@ Expected result:
 ---
 
 ## Smoke Tests
+
+### Runtime Proposal Capture
+
+Use a generated proposal path so the stable fixture is not overwritten:
+
+```powershell
+python .\tools\capture_runtime_proposal.py --agent-id simulated-coding-agent --action-type write_file --target .github/workflows/deploy.yml --intent "modify deployment workflow" --output .\examples\runtime_proposal\proposal.generated.v0.9.json
+```
+
+Expected:
+
+```text
+PROPOSAL CAPTURED
+CONSEQUENCE NORMALIZED
+RUNTIME PROPOSAL RECORD CREATED
+EXECUTION_STATUS: NOT_EXECUTED
+AUTHORIZATION_STATUS: REQUIRES_GOVERNANCE
+```
+
+### Runtime Proposal Verification
+
+```powershell
+python .\tools\capture_runtime_proposal.py --verify-only .\examples\runtime_proposal\proposal.generated.v0.9.json
+python .\tools\capture_runtime_proposal.py --verify-only .\examples\runtime_proposal\proposal.v0.9.json
+```
+
+Expected:
+
+```text
+RUNTIME PROPOSAL VERIFY PASS
+RUNTIME PROPOSAL VERIFY PASS
+```
+
+Remove the generated proposal after smoke testing:
+
+```powershell
+Remove-Item .\examples\runtime_proposal\proposal.generated.v0.9.json
+```
 
 ### Approval Token Verification
 
@@ -349,57 +419,16 @@ Expected:
 LEDGER BUNDLE VERIFY PASS
 ```
 
-### Verification Receipt Emission
-
-Use a generated receipt path so the stable fixture is not overwritten:
-
-```powershell
-python .\tools\verify_ledger_bundle.py .\examples\verification_bundle\full_gcr_bundle.v0.5.json --receipt-out .\examples\verification_receipt\verification_receipt.generated.v0.6.json
-```
-
-Expected:
-
-```text
-LEDGER BUNDLE VERIFY PASS
-```
-
-### Generated Verification Receipt Verification
-
-```powershell
-python .\tools\verify_verification_receipt.py .\examples\verification_receipt\verification_receipt.generated.v0.6.json
-```
-
-Expected:
-
-```text
-VERIFICATION RECEIPT VERIFY PASS
-```
-
-Remove the generated receipt after smoke testing:
-
-```powershell
-Remove-Item .\examples\verification_receipt\verification_receipt.generated.v0.6.json
-```
-
-### Stable Receipt Fixture Verification
+### Verification Receipt Verification
 
 ```powershell
 python .\tools\verify_verification_receipt.py .\examples\verification_receipt\verification_receipt.v0.6.json
-python .\tools\verify_verification_receipt.py .\examples\verification_receipt\verification_receipt.fail.v0.7.json
 ```
 
 Expected:
 
 ```text
 VERIFICATION RECEIPT VERIFY PASS
-VERIFICATION RECEIPT VERIFY PASS
-```
-
-Stable fixture receipt hashes:
-
-```text
-v0.6 PASS receipt_hash: sha256:abd980d2c7ac825522f1caf6466667f9a2a9afb2d2b6c5ce7e73007c30320864
-v0.7 FAIL receipt_hash: sha256:f9214ffb70f8636134e0dccb16735576a37e7085ff34f216b0207e04b5828722
 ```
 
 ### Verification Receipt Index Verification
@@ -426,14 +455,54 @@ Expected:
 MUTATION CHECK PASS
 ```
 
-Stable fixture index values:
+---
+
+## Runtime Proposal Hook
+
+v0.9 adds a local simulated runtime proposal hook:
 
 ```text
-index_id: 77777777-7777-4777-8777-777777777777
-receipt_count: 2
-status_counts: PASS 1, FAIL 1
-index_hash: sha256:ec4ab3dfb958df29c05da0214999031fde663496f55442681ca866fd95337b59
+tools/capture_runtime_proposal.py
 ```
+
+The runtime proposal hook captures a proposed AI-agent action before execution and emits a governed proposal record.
+
+It records:
+
+* proposal identifier
+* schema version
+* creation timestamp
+* agent identifier
+* source metadata
+* proposed action
+* proposed action hash
+* normalized consequence
+* normalized consequence hash
+* consequence classification
+* consequence risk
+* execution status
+* authorization status
+* proof boundary
+* record hash
+
+The stable v0.9 fixture records a simulated coding agent proposing a deployment workflow file write:
+
+```text
+execution_status: NOT_EXECUTED
+authorization_status: REQUIRES_GOVERNANCE
+consequence_classification: PRODUCTION_STATE_CHANGE
+consequence_risk: HIGH
+```
+
+The hook proves proposal capture only.
+
+It does not grant execution authority.
+
+It does not execute tools.
+
+It does not call external systems.
+
+It does not create approvals, receipts, receipt indexes, bundles, evidence manifests, or authority manifests.
 
 ---
 
@@ -469,80 +538,6 @@ The UI may display verifier results. It may not create new governance authority.
 
 ---
 
-## What v0.8 Adds
-
-v0.8 adds a local human-facing verifier interface over existing GCR verifier tools.
-
-It adds:
-
-* local verifier UI entrypoint
-* seven approved verifier surfaces
-* CLI/UI semantic parity tests
-* hard fail rule tests
-* fixture non-mutation tests
-* no-upload-storage tests
-* no-new-governance-artifact tests
-* forbidden overclaim language checks
-* primary output parity tests
-
-v0.8 proves interface exposure, not new governance authority.
-
-The UI may display existing verification results.
-
-The UI may not:
-
-* change verification semantics
-* create new approvals
-* create new decisions
-* create new receipts
-* create new receipt indexes
-* create new bundles
-* create new evidence manifests
-* create new authority manifests
-* create runtime hooks
-* persist uploads
-* promote FAIL to PASS
-* suppress failure reasons
-* reinterpret verifier output
-* claim compliance, legal admissibility, production custody, safety, or correctness
-
----
-
-## What v0.7 Adds
-
-v0.7 adds a verification receipt index as a governance-record layer.
-
-The index records local membership for multiple verification receipts.
-
-It records:
-
-* index identifier
-* schema version
-* created and updated timestamps
-* receipt count
-* receipt entries
-* PASS and FAIL status counts
-* latest verification time
-* index hash
-
-Proof distinction:
-
-```text
-index_hash proves:   the membership of this index has not changed
-receipt_hash proves: this specific receipt has not been modified
-verifier proves:     the receipt was valid when it was verified
-```
-
-The index does not re-verify the receipts it indexes.
-
-The index records receipt membership and the recorded status at the time the receipt was added.
-
-Index integrity is not the same as receipt validity.
-
-Receipt validity is not the same as real-world correctness.
-
----
-
 ## Proof Boundary
 
 This repository remains a local reference implementation and developer starter kit.
@@ -563,13 +558,15 @@ It does not claim:
 * real-world truth of the evidence
 * legal validity of the approval
 * safety of the original action
+* that proposal capture grants execution authority
+* that a captured proposal should execute
+* that model output becomes authority
 * that index membership proves receipt validity
 * that receipt validity proves real-world correctness
 * that the UI creates governance authority
 * that the UI creates new verification semantics
-* that the UI certifies, validates, or approves the underlying AI action
 
-The current implementation uses local schemas, local examples, local hash computation, local verification tools, a local verifier UI, and local test fixtures.
+The current implementation uses local schemas, local examples, local hash computation, local verification tools, a local verifier UI, a local simulated runtime proposal capture tool, and local test fixtures.
 
 ---
 
@@ -581,11 +578,11 @@ Acceptable:
 
 Acceptable:
 
-> GCR creates and verifies portable governance records for AI-agent actions, binding proposal, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
+> GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
 
 Acceptable:
 
-> v0.7 adds a local verification receipt index whose membership and integrity can be independently verified.
+> v0.9 captures a simulated AI-agent proposal before execution and converts it into a governed proposal record without granting execution authority.
 
 Acceptable:
 
@@ -593,15 +590,11 @@ Acceptable:
 
 Not acceptable:
 
-> Index membership proves receipt validity or real-world correctness.
+> Capturing a proposal authorizes the action.
 
 Not acceptable:
 
 > The UI creates new governance authority.
-
-Not acceptable:
-
-> The UI certifies the underlying AI action.
 
 Not acceptable:
 
@@ -636,7 +629,7 @@ Verifiable AI Governance Records
 The core product-category sentence is:
 
 ```text
-GCR creates and verifies portable governance records for AI-agent actions, binding proposal, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
+GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
 ```
 
 ---
@@ -646,21 +639,30 @@ GCR creates and verifies portable governance records for AI-agent actions, bindi
 Current public release:
 
 ```text
-Governed Consequence Routing v0.8 — Local Verifier UI
+Governed Consequence Routing v0.9 -- Runtime Proposal Hook
 ```
 
 Current expected local test result:
 
 ```text
-161 passed
+191 passed
 ```
 
 Current proof chain:
 
 ```text
-local verifier UI
-        ^
+runtime proposal hook
         |
+        v
+captured proposal
+        |
+        v
+normalized consequence
+        |
+        v
+governance record input
+        |
+        v
 existing verifier tools
         ^
         |
@@ -680,4 +682,7 @@ approval token <-> reviewer authority manifest
         ^
         |
 evidence manifest <-> evidence items
+        ^
+        |
+local verifier UI
 ```
