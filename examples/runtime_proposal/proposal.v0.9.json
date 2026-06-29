@@ -1,0 +1,56 @@
+{
+  "agent_id": "simulated-coding-agent",
+  "authorization_status": "REQUIRES_GOVERNANCE",
+  "consequence_classification": "PRODUCTION_STATE_CHANGE",
+  "consequence_risk": "HIGH",
+  "created_at": "2026-06-29T00:00:00Z",
+  "execution_status": "NOT_EXECUTED",
+  "normalized_consequence": {
+    "consequence_summary": "write_file proposal for .github/workflows/deploy.yml: modify deployment workflow",
+    "consequence_type": "PRODUCTION_STATE_CHANGE",
+    "normalized_target": ".github/workflows/deploy.yml"
+  },
+  "normalized_consequence_hash": "sha256:b1d7634a3b26206b87e35d343a2d8cffb45bd663e813c96222f7d8e556594d65",
+  "proof_boundary": {
+    "does_not_prove": [
+      "execution authority",
+      "authorization",
+      "tool execution",
+      "external system calls",
+      "production custody",
+      "legal admissibility",
+      "regulatory compliance",
+      "clinical safety",
+      "financial advice suitability",
+      "enterprise compliance",
+      "SSO-backed identity",
+      "production identity",
+      "non-repudiation",
+      "correctness of the underlying AI action",
+      "real-world truth of evidence",
+      "legal validity of approval",
+      "safety of the original action",
+      "that proposal capture equals approval",
+      "that model output becomes authority",
+      "that a captured proposal should execute"
+    ],
+    "proves": [
+      "v0.9 proves that a live or simulated AI-agent proposal can be captured before execution and converted into a governed proposal record without granting execution authority.",
+      "The runtime proposal hook captures, normalizes, classifies, and records a proposal before execution.",
+      "The runtime proposal hook records execution_status as NOT_EXECUTED."
+    ]
+  },
+  "proposal_id": "99999999-9999-4999-8999-999999999999",
+  "proposed_action": {
+    "action_type": "write_file",
+    "intent": "modify deployment workflow",
+    "target": ".github/workflows/deploy.yml"
+  },
+  "proposed_action_hash": "sha256:853d86321c378466997d90441c29af264dc89f1867092951a2fcc98188cd4356",
+  "record_hash": "sha256:2dd569bfa203acfe4523553a83db0363e3a0cb1c94fa664cfa87f2b41177b5ad",
+  "schema_version": "runtime_proposal_v0.9",
+  "source": {
+    "source_id": "runtime-proposal-fixture-v0.9",
+    "source_type": "SIMULATED_AGENT"
+  }
+}
