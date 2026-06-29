@@ -4,46 +4,47 @@
 
 Governed Consequence Routing is a local reference implementation for generating and verifying governance records around AI-agent actions.
 
-It demonstrates how consequential AI proposals can be captured before execution and represented as inspectable records that bind proposal capture, authority, evidence, decision, verification, receipt history, receipt-index membership, local interface exposure, and proof boundary.
+It demonstrates how consequential AI proposals can be captured before execution and represented as inspectable records that bind proposal capture, authority, evidence, decision, verification, receipt history, receipt-index membership, local interface exposure, governance graph projection, and proof boundary.
 
 ---
 
 ## Current Release
 
 ```text
-Governed Consequence Routing v0.9 -- Runtime Proposal Hook
+Governed Consequence Routing v1.0 -- Governance Record Graph
 ```
 
 Current release tag:
 
 ```text
-v0.9-runtime-proposal-hook
+v1.0-governance-record-graph
 ```
 
 Expected local test result:
 
 ```text
-191 passed
+241 passed
 ```
 
 Current proof ladder:
 
 ```text
-v0.3 -> v0.4 -> v0.5 -> v0.6 -> v0.7 -> v0.8 -> v0.9
+v0.3 -> v0.4 -> v0.5 -> v0.6 -> v0.7 -> v0.8 -> v0.9 -> v1.0
 ```
 
-Current v0.9 proof sentence:
+Current v1.0 proof sentence:
 
 ```text
-v0.9 proves that a live or simulated AI-agent proposal can be captured before execution and converted into a governed proposal record without granting execution authority.
+v1.0 proves that GCR can assemble its verified local artifacts into an end-to-end governance record graph for an AI-agent consequence, linking proposal capture, authority, evidence, verification, receipt, index, and human inspection without creating new authority or execution.
 ```
 
-Core v0.9 boundary:
+Core v1.0 boundary:
 
 ```text
-v0.9 proves proposal capture.
-v0.9 does not prove execution authority.
-If a runtime proposal hook causes execution, v0.9 fails.
+v1.0 proves local governance-record continuity.
+The governance record graph is a projection, not the source of truth.
+JSON artifacts remain the source of truth.
+Existing verifiers remain the proof mechanism.
 ```
 
 ---
@@ -53,12 +54,12 @@ If a runtime proposal hook causes execution, v0.9 fails.
 Current proof layer:
 
 ```text
-v0.9 -- Runtime Proposal Hook
+v1.0 -- Governance Record Graph
 ```
 
-The runtime proposal hook may capture, normalize, classify, and emit a governed proposal record.
+The governance record graph may represent verified local artifacts as graph nodes and verified relationships as graph edges.
 
-It may not authorize execution, execute tools, call external systems, mutate governance artifacts, create approvals, create receipts, create indexes, create bundles, or bypass existing verifier logic.
+It may not become the source of truth, replace existing verifiers, invent authority, invent evidence, invent verification results, execute tools, call external systems, or claim real-world correctness.
 
 ---
 
@@ -151,6 +152,33 @@ verification receipt index
         ^
         |
 local verifier UI
+
+v1.0:
+governance record graph
+        ^
+        |
+local verifier UI
+        ^
+        |
+verification receipt index
+        ^
+        |
+verification receipt
+        ^
+        |
+portable verification bundle
+        ^
+        |
+decision envelope
+        ^
+        |
+approval token <-> reviewer authority manifest
+        ^
+        |
+evidence manifest <-> evidence items
+        ^
+        |
+runtime proposal hook
 ```
 
 ---
@@ -163,6 +191,8 @@ Core artifacts include:
 
 * runtime proposal schema and fixture
 * runtime proposal capture tool
+* governance record graph schema and fixture
+* governance record graph builder and verifier
 * decision envelope examples
 * reviewer authority manifest
 * approval token example
@@ -173,11 +203,12 @@ Core artifacts include:
 * local verifier UI
 * CLI/UI semantic parity tests
 * runtime proposal non-execution tests
+* governance record graph projection tests
 * JSON schemas
 * local verification tools
 * governance documentation
 * release notes through v0.7
-* v0.8 and v0.9 release notes in GitHub Releases
+* v0.8, v0.9, and v1.0 release notes in GitHub Releases
 * buyer/developer quick start
 * test suite
 
@@ -188,12 +219,12 @@ The repository is intended to make the governance record chain inspectable, test
 ## Core Pattern
 
 ```text
-Capture proposal -> normalize consequence -> classify -> evidence-bind -> authorize -> record -> verify -> receipt -> index -> expose through local UI
+Capture proposal -> normalize consequence -> classify -> evidence-bind -> authorize -> record -> verify -> receipt -> index -> expose through local UI -> project governance record graph
 ```
 
 The system does not treat model output as authority.
 
-It captures proposed consequences before execution, then binds them to policy, evidence, reviewer authority, verification results, verification receipts, receipt-index membership, interface exposure, and proof-boundary metadata.
+It captures proposed consequences before execution, then binds them to policy, evidence, reviewer authority, verification results, verification receipts, receipt-index membership, interface exposure, graph projection, and proof-boundary metadata.
 
 ---
 
@@ -203,6 +234,7 @@ It captures proposed consequences before execution, then binds them to policy, e
 
 * `docs/standard/GCR_BEHAVIORAL_STANDARD_v0.1.md`
 * `docs/governance/current-proof-boundary.md`
+* `docs/governance/governance-record-layer-v1.0.md`
 * `docs/governance/runtime-proposal-hook-v0.9.md`
 * `docs/governance/local-verifier-ui-v0.8.md`
 * `docs/governance/verification-receipt-index-v0.7.md`
@@ -222,6 +254,8 @@ v0.8 release notes are published in the GitHub Release for tag `v0.8-local-verif
 
 v0.9 release notes are published in the GitHub Release for tag `v0.9-runtime-proposal-hook`.
 
+v1.0 release notes are published in the GitHub Release for tag `v1.0-governance-record-graph`.
+
 ### Schemas
 
 * `schemas/decision_envelope_v0.1.schema.json`
@@ -232,6 +266,7 @@ v0.9 release notes are published in the GitHub Release for tag `v0.9-runtime-pro
 * `schemas/verification_receipt_v0.6.schema.json`
 * `schemas/verification_receipt_index_v0.7.schema.json`
 * `schemas/runtime_proposal_v0.9.schema.json`
+* `schemas/governance_record_graph_v1.0.schema.json`
 
 ### Examples
 
@@ -245,6 +280,7 @@ v0.9 release notes are published in the GitHub Release for tag `v0.9-runtime-pro
 * `examples/verification_receipt/verification_receipt.fail.v0.7.json`
 * `examples/verification_receipt_index/index.v0.7.json`
 * `examples/runtime_proposal/proposal.v0.9.json`
+* `examples/governance_record_graph/graph.v1.0.json`
 
 ### Verification and Capture Tools
 
@@ -258,15 +294,20 @@ v0.9 release notes are published in the GitHub Release for tag `v0.9-runtime-pro
 * `tools/verify_verification_receipt.py`
 * `tools/verify_receipt_index.py`
 * `tools/local_verifier_ui.py`
+* `tools/build_governance_record_graph.py`
+* `tools/verify_governance_record_graph.py`
 
 ### Tests
 
 * `tests/test_runtime_proposal_hook.py`
 * `tests/test_local_verifier_ui.py`
+* `tests/test_governance_record_graph.py`
 
 The v0.9 runtime proposal tests verify proposal capture, schema validation, proposed-action hash verification, normalized-consequence hash verification, record hash verification, non-execution, authorization boundary behavior, failure-closed behavior, and artifact non-mutation.
 
 The v0.8 UI tests verify CLI/UI semantic parity, hard fail behavior, unknown verifier rejection, fixture non-mutation, no upload storage, no new governance artifacts, FAIL-not-promoted behavior, forbidden overclaim language checks, and primary output parity.
+
+The v1.0 governance record graph tests verify graph schema validation, graph hash verification, source artifact hash verification, edge derivation, required node and edge coverage, graph mutation detection, source-of-truth boundaries, non-invention checks, and end-to-end traversal.
 
 ---
 
@@ -290,7 +331,19 @@ python -m pytest -q
 Expected result:
 
 ```text
-191 passed
+241 passed
+```
+
+Run the v1.0 governance record graph tests:
+
+```powershell
+python -m pytest tests/test_governance_record_graph.py -q
+```
+
+Expected result:
+
+```text
+50 passed
 ```
 
 Run the v0.9 runtime proposal tests:
@@ -455,6 +508,95 @@ Expected:
 MUTATION CHECK PASS
 ```
 
+### Governance Record Graph Build
+
+Use a generated graph path so the stable fixture is not overwritten:
+
+```powershell
+python .\tools\build_governance_record_graph.py --output .\examples\governance_record_graph\graph.generated.v1.0.json
+```
+
+Expected:
+
+```text
+GOVERNANCE RECORD GRAPH BUILD PASS
+SOURCE ARTIFACT CHECK PASS
+EDGE DERIVATION CHECK PASS
+GRAPH HASH VERIFY PASS
+GRAPH PROJECTION ONLY
+NO EXECUTION AUTHORITY CREATED
+```
+
+### Governance Record Graph Verification
+
+```powershell
+python .\tools\verify_governance_record_graph.py .\examples\governance_record_graph\graph.generated.v1.0.json
+python .\tools\verify_governance_record_graph.py .\examples\governance_record_graph\graph.v1.0.json
+```
+
+Expected:
+
+```text
+GOVERNANCE RECORD GRAPH VERIFY PASS
+GOVERNANCE RECORD GRAPH VERIFY PASS
+```
+
+### Governance Record Graph Mutation Check
+
+```powershell
+python .\tools\verify_governance_record_graph.py .\examples\governance_record_graph\graph.v1.0.json --mutate
+```
+
+Expected:
+
+```text
+GRAPH MUTATION CHECK PASS
+```
+
+Remove the generated graph after smoke testing:
+
+```powershell
+Remove-Item .\examples\governance_record_graph\graph.generated.v1.0.json
+```
+
+---
+
+## Governance Record Graph
+
+v1.0 adds a governance record graph projection:
+
+```text
+tools/build_governance_record_graph.py
+tools/verify_governance_record_graph.py
+```
+
+The graph links verified local artifacts into an inspectable governance record graph for an AI-agent consequence.
+
+It includes:
+
+* runtime proposal node
+* agent node
+* consequence node
+* decision envelope node
+* approval token node
+* reviewer authority manifest node
+* evidence manifest and evidence item nodes
+* verification bundle node
+* verification receipt node
+* receipt index node
+* verifier result node
+* local verifier UI node
+* graph hash
+* proof boundary
+
+The graph is a projection, not the source of truth.
+
+JSON artifacts remain the source of truth.
+
+Existing verifiers remain the proof mechanism.
+
+The graph does not require RAG, embeddings, vector search, Neo4j, RDF, SPARQL, graph databases, ontology engines, external calls, or agent execution.
+
 ---
 
 ## Runtime Proposal Hook
@@ -561,12 +703,18 @@ It does not claim:
 * that proposal capture grants execution authority
 * that a captured proposal should execute
 * that model output becomes authority
+* that the graph becomes the source of truth
+* that the graph replaces existing verifiers
+* that the graph proves production custody
+* that the graph proves legal or compliance status
+* that the graph proves RAG correctness or retrieval quality
+* that the graph requires graph database readiness
 * that index membership proves receipt validity
 * that receipt validity proves real-world correctness
 * that the UI creates governance authority
 * that the UI creates new verification semantics
 
-The current implementation uses local schemas, local examples, local hash computation, local verification tools, a local verifier UI, a local simulated runtime proposal capture tool, and local test fixtures.
+The current implementation uses local schemas, local examples, local hash computation, local verification tools, a local verifier UI, a local simulated runtime proposal capture tool, a local governance record graph projection, and local test fixtures.
 
 ---
 
@@ -578,7 +726,11 @@ Acceptable:
 
 Acceptable:
 
-> GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
+> GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, graph projection, and proof boundary into an inspectable record.
+
+Acceptable:
+
+> v1.0 assembles verified local GCR artifacts into a governance record graph projection without creating new authority or execution.
 
 Acceptable:
 
@@ -595,6 +747,14 @@ Not acceptable:
 Not acceptable:
 
 > The UI creates new governance authority.
+
+Not acceptable:
+
+> The graph is the source of truth.
+
+Not acceptable:
+
+> The graph proves legal, compliance, production, RAG, retrieval, or graph database readiness.
 
 Not acceptable:
 
@@ -629,7 +789,7 @@ Verifiable AI Governance Records
 The core product-category sentence is:
 
 ```text
-GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, and proof boundary into an inspectable record.
+GCR creates and verifies portable governance records for AI-agent actions, binding proposal capture, authority, evidence, decision, receipt history, interface exposure, graph projection, and proof boundary into an inspectable record.
 ```
 
 ---
@@ -639,31 +799,22 @@ GCR creates and verifies portable governance records for AI-agent actions, bindi
 Current public release:
 
 ```text
-Governed Consequence Routing v0.9 -- Runtime Proposal Hook
+Governed Consequence Routing v1.0 -- Governance Record Graph
 ```
 
 Current expected local test result:
 
 ```text
-191 passed
+241 passed
 ```
 
 Current proof chain:
 
 ```text
-runtime proposal hook
+governance record graph
+        ^
         |
-        v
-captured proposal
-        |
-        v
-normalized consequence
-        |
-        v
-governance record input
-        |
-        v
-existing verifier tools
+local verifier UI
         ^
         |
 verification receipt index
@@ -678,11 +829,11 @@ portable verification bundle
 decision envelope
         ^
         |
-approval token <-> reviewer authority manifest
-        ^
-        |
 evidence manifest <-> evidence items
         ^
         |
-local verifier UI
+approval token <-> reviewer authority manifest
+        ^
+        |
+runtime proposal hook
 ```
