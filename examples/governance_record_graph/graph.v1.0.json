@@ -1,0 +1,545 @@
+{
+  "created_at": "2026-06-29T00:00:00Z",
+  "edges": [
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify"
+        ]
+      },
+      "edge_id": "edge-001",
+      "edge_type": "PROPOSED_BY",
+      "from_node": "runtime-proposal-001",
+      "to_node": "agent-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify"
+        ]
+      },
+      "edge_id": "edge-002",
+      "edge_type": "NORMALIZED_TO",
+      "from_node": "runtime-proposal-001",
+      "to_node": "consequence-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9",
+          "approved-decision-envelope-v0.3"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify",
+          "decision-envelope-approval-binding-verify"
+        ]
+      },
+      "edge_id": "edge-003",
+      "edge_type": "CLASSIFIED_AS",
+      "from_node": "consequence-001",
+      "to_node": "decision-envelope-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify"
+        ]
+      },
+      "edge_id": "edge-004",
+      "edge_type": "HAS_EXECUTION_STATUS",
+      "from_node": "runtime-proposal-001",
+      "to_node": "consequence-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify"
+        ]
+      },
+      "edge_id": "edge-005",
+      "edge_type": "HAS_AUTHORIZATION_STATUS",
+      "from_node": "runtime-proposal-001",
+      "to_node": "consequence-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "approved-decision-envelope-v0.3",
+          "approval-token-v0.3"
+        ],
+        "verifier_result_ids": [
+          "decision-envelope-approval-binding-verify"
+        ]
+      },
+      "edge_id": "edge-006",
+      "edge_type": "BOUND_TO",
+      "from_node": "decision-envelope-001",
+      "to_node": "approval-token-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "approval-token-v0.3",
+          "reviewer-authority-manifest-v0.3"
+        ],
+        "verifier_result_ids": [
+          "reviewer-authority-binding-verify"
+        ]
+      },
+      "edge_id": "edge-007",
+      "edge_type": "AUTHORIZED_BY",
+      "from_node": "approval-token-001",
+      "to_node": "reviewer-authority-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "evidence-bound-decision-envelope-v0.4",
+          "evidence-manifest-v0.4"
+        ],
+        "verifier_result_ids": [
+          "evidence-manifest-binding-verify"
+        ]
+      },
+      "edge_id": "edge-008",
+      "edge_type": "SUPPORTED_BY",
+      "from_node": "decision-envelope-001",
+      "to_node": "evidence-manifest-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "evidence-manifest-v0.4"
+        ],
+        "verifier_result_ids": [
+          "evidence-manifest-binding-verify"
+        ]
+      },
+      "edge_id": "edge-009",
+      "edge_type": "CONTAINS",
+      "from_node": "evidence-manifest-001",
+      "to_node": "evidence-item-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-bundle-v0.5",
+          "approved-decision-envelope-v0.3"
+        ],
+        "verifier_result_ids": [
+          "ledger-bundle-verify"
+        ]
+      },
+      "edge_id": "edge-010",
+      "edge_type": "CONTAINS",
+      "from_node": "verification-bundle-001",
+      "to_node": "decision-envelope-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-bundle-v0.5",
+          "approval-token-v0.3"
+        ],
+        "verifier_result_ids": [
+          "ledger-bundle-verify"
+        ]
+      },
+      "edge_id": "edge-011",
+      "edge_type": "CONTAINS",
+      "from_node": "verification-bundle-001",
+      "to_node": "approval-token-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-bundle-v0.5",
+          "evidence-manifest-v0.4"
+        ],
+        "verifier_result_ids": [
+          "ledger-bundle-verify"
+        ]
+      },
+      "edge_id": "edge-012",
+      "edge_type": "CONTAINS",
+      "from_node": "verification-bundle-001",
+      "to_node": "evidence-manifest-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-bundle-v0.5"
+        ],
+        "verifier_result_ids": [
+          "ledger-bundle-verify"
+        ]
+      },
+      "edge_id": "edge-013",
+      "edge_type": "VERIFIED_BY",
+      "from_node": "verification-bundle-001",
+      "to_node": "verifier-result-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-receipt-v0.6",
+          "verification-bundle-v0.5"
+        ],
+        "verifier_result_ids": [
+          "verification-receipt-verify"
+        ]
+      },
+      "edge_id": "edge-014",
+      "edge_type": "RECEIPT_FOR",
+      "from_node": "verification-receipt-001",
+      "to_node": "verification-bundle-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "verification-receipt-v0.6",
+          "receipt-index-v0.7"
+        ],
+        "verifier_result_ids": [
+          "receipt-index-verify"
+        ]
+      },
+      "edge_id": "edge-015",
+      "edge_type": "INDEXED_IN",
+      "from_node": "verification-receipt-001",
+      "to_node": "receipt-index-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "local-verifier-ui-v0.8"
+        ],
+        "verifier_result_ids": [
+          "local-verifier-ui-inspection"
+        ]
+      },
+      "edge_id": "edge-016",
+      "edge_type": "DISPLAYED_BY",
+      "from_node": "verifier-result-001",
+      "to_node": "local-verifier-ui-001"
+    },
+    {
+      "derived_from": {
+        "source_artifact_ids": [
+          "runtime-proposal-v0.9",
+          "local-verifier-ui-v0.8"
+        ],
+        "verifier_result_ids": [
+          "runtime-proposal-verify",
+          "local-verifier-ui-inspection"
+        ]
+      },
+      "edge_id": "edge-017",
+      "edge_type": "DERIVED_FROM",
+      "from_node": "local-verifier-ui-001",
+      "to_node": "runtime-proposal-001"
+    }
+  ],
+  "graph_hash": "sha256:b9543aa42e9462f60182c4cd191f4691052d7c8c1f6f070bc6c9a0a852540ab1",
+  "graph_id": "10101010-1010-4010-8010-101010101010",
+  "nodes": [
+    {
+      "label": "Runtime proposal v0.9",
+      "node_id": "runtime-proposal-001",
+      "node_type": "RuntimeProposal",
+      "source_artifact_ids": [
+        "runtime-proposal-v0.9"
+      ]
+    },
+    {
+      "label": "simulated-coding-agent",
+      "node_id": "agent-001",
+      "node_type": "Agent",
+      "source_artifact_ids": [
+        "runtime-proposal-v0.9"
+      ]
+    },
+    {
+      "label": "PRODUCTION_STATE_CHANGE / NOT_EXECUTED / REQUIRES_GOVERNANCE",
+      "node_id": "consequence-001",
+      "node_type": "Consequence",
+      "source_artifact_ids": [
+        "runtime-proposal-v0.9"
+      ]
+    },
+    {
+      "label": "Approved decision envelope v0.3",
+      "node_id": "decision-envelope-001",
+      "node_type": "DecisionEnvelope",
+      "source_artifact_ids": [
+        "approved-decision-envelope-v0.3"
+      ]
+    },
+    {
+      "label": "Approval token v0.3",
+      "node_id": "approval-token-001",
+      "node_type": "ApprovalToken",
+      "source_artifact_ids": [
+        "approval-token-v0.3"
+      ]
+    },
+    {
+      "label": "Reviewer authority manifest v0.3",
+      "node_id": "reviewer-authority-001",
+      "node_type": "ReviewerAuthorityManifest",
+      "source_artifact_ids": [
+        "reviewer-authority-manifest-v0.3"
+      ]
+    },
+    {
+      "label": "Evidence manifest v0.4",
+      "node_id": "evidence-manifest-001",
+      "node_type": "EvidenceManifest",
+      "source_artifact_ids": [
+        "evidence-manifest-v0.4"
+      ]
+    },
+    {
+      "label": "Admitted evidence item from evidence manifest",
+      "node_id": "evidence-item-001",
+      "node_type": "EvidenceItem",
+      "source_artifact_ids": [
+        "evidence-manifest-v0.4"
+      ]
+    },
+    {
+      "label": "Portable verification bundle v0.5",
+      "node_id": "verification-bundle-001",
+      "node_type": "VerificationBundle",
+      "source_artifact_ids": [
+        "verification-bundle-v0.5"
+      ]
+    },
+    {
+      "label": "Verification receipt v0.6",
+      "node_id": "verification-receipt-001",
+      "node_type": "VerificationReceipt",
+      "source_artifact_ids": [
+        "verification-receipt-v0.6"
+      ]
+    },
+    {
+      "label": "Verification receipt index v0.7",
+      "node_id": "receipt-index-001",
+      "node_type": "ReceiptIndex",
+      "source_artifact_ids": [
+        "receipt-index-v0.7"
+      ]
+    },
+    {
+      "label": "Approved local verifier result set",
+      "node_id": "verifier-result-001",
+      "node_type": "VerifierResult",
+      "source_artifact_ids": [
+        "verification-bundle-v0.5",
+        "verification-receipt-v0.6",
+        "receipt-index-v0.7"
+      ]
+    },
+    {
+      "label": "Local verifier UI v0.8",
+      "node_id": "local-verifier-ui-001",
+      "node_type": "LocalVerifierUI",
+      "source_artifact_ids": [
+        "local-verifier-ui-v0.8"
+      ]
+    }
+  ],
+  "proof_boundary": {
+    "does_not_prove": [
+      "production custody",
+      "external identity",
+      "legal admissibility",
+      "regulatory compliance",
+      "real-world evidence truth",
+      "execution safety",
+      "hosted product readiness",
+      "RAG correctness",
+      "retrieval quality",
+      "graph database production readiness",
+      "ontology completeness",
+      "external notarization",
+      "clinical safety",
+      "financial advice suitability",
+      "enterprise compliance",
+      "SSO-backed identity",
+      "production identity",
+      "non-repudiation",
+      "correctness of the underlying AI action",
+      "legal validity of approval",
+      "execution authority"
+    ],
+    "proves": [
+      "v1.0 proves local governance-record continuity.",
+      "v1.0 proves that GCR can assemble its verified local artifacts into an end-to-end governance record graph for an AI-agent consequence, linking proposal capture, authority, evidence, verification, receipt, index, and human inspection without creating new authority or execution.",
+      "The graph is an inspectable projection of verified local relationships."
+    ]
+  },
+  "schema_version": "governance_record_graph_v1.0",
+  "source_artifacts": [
+    {
+      "artifact_id": "runtime-proposal-v0.9",
+      "artifact_type": "RUNTIME_PROPOSAL",
+      "path": "examples/runtime_proposal/proposal.v0.9.json",
+      "sha256": "sha256:918695e00a62a103aedf46eab2ca9608edb4ab39f99d8d971c869dfdc4329333"
+    },
+    {
+      "artifact_id": "approval-token-v0.3",
+      "artifact_type": "APPROVAL_TOKEN",
+      "path": "examples/reviewer_authority/approval_token.v0.3.json",
+      "sha256": "sha256:a846cf859c03b36b0a089cd618a73b26eaf06bfcb66f2b2e9feb76cb49ccaa69"
+    },
+    {
+      "artifact_id": "reviewer-authority-manifest-v0.3",
+      "artifact_type": "REVIEWER_AUTHORITY_MANIFEST",
+      "path": "examples/reviewer_authority/manifest.v0.3.json",
+      "sha256": "sha256:90e9b4d8b7d18b946d96de0f070562ce766df01735eb08302699ac8a70a6ee82"
+    },
+    {
+      "artifact_id": "approved-decision-envelope-v0.3",
+      "artifact_type": "DECISION_ENVELOPE",
+      "path": "examples/reviewer_authority/approved_decision_envelope.v0.3.json",
+      "sha256": "sha256:79ab7d9a4e5452cd22664094517ee9926d415cb50aa2e46ee69effdf32e6ab24"
+    },
+    {
+      "artifact_id": "evidence-manifest-v0.4",
+      "artifact_type": "EVIDENCE_MANIFEST",
+      "path": "examples/evidence_manifest/manifest.v0.4.json",
+      "sha256": "sha256:ffa3dc2b896ba50bbe4697d9c1c473455075a44b42a54a153040845e7f620d05"
+    },
+    {
+      "artifact_id": "evidence-bound-decision-envelope-v0.4",
+      "artifact_type": "DECISION_ENVELOPE",
+      "path": "examples/evidence_manifest/evidence_bound_decision_envelope.v0.4.json",
+      "sha256": "sha256:f82a1a47fbeb29d0c433dd6040b7c80f6134d32e3527601c323400ca4b97d9f8"
+    },
+    {
+      "artifact_id": "verification-bundle-v0.5",
+      "artifact_type": "VERIFICATION_BUNDLE",
+      "path": "examples/verification_bundle/full_gcr_bundle.v0.5.json",
+      "sha256": "sha256:79bb1b292dbf7cac5cc466b5b72e2ab096f4e4e97414249a6f36b7fec6927195"
+    },
+    {
+      "artifact_id": "verification-receipt-v0.6",
+      "artifact_type": "VERIFICATION_RECEIPT",
+      "path": "examples/verification_receipt/verification_receipt.v0.6.json",
+      "sha256": "sha256:3f35940357a1ed115bceb8f044e3cdb398914c2bd6be55fc58104f8fc3e8fbb3"
+    },
+    {
+      "artifact_id": "receipt-index-v0.7",
+      "artifact_type": "RECEIPT_INDEX",
+      "path": "examples/verification_receipt_index/index.v0.7.json",
+      "sha256": "sha256:b197dde7bd2b3b8a69805d715769de15ea6aadd77b0c335ebd34be62416f4455"
+    },
+    {
+      "artifact_id": "local-verifier-ui-v0.8",
+      "artifact_type": "LOCAL_VERIFIER_UI",
+      "path": "tools/local_verifier_ui.py",
+      "sha256": "sha256:99163ffba0f09a9869fd2e76c5d7cac0b81aeb3ecad00e5413a4dd8a288f96a0"
+    }
+  ],
+  "verifier_results": [
+    {
+      "primary_output": "RUNTIME PROPOSAL VERIFY PASS",
+      "source_artifact_ids": [
+        "runtime-proposal-v0.9"
+      ],
+      "status": "PASS",
+      "verifier_id": "runtime-proposal-verify",
+      "verifier_name": "capture_runtime_proposal --verify-only"
+    },
+    {
+      "primary_output": "APPROVAL TOKEN VERIFY PASS",
+      "source_artifact_ids": [
+        "approval-token-v0.3"
+      ],
+      "status": "PASS",
+      "verifier_id": "approval-token-verify",
+      "verifier_name": "verify_approval_token"
+    },
+    {
+      "primary_output": "REVIEWER AUTHORITY BINDING VERIFY PASS",
+      "source_artifact_ids": [
+        "reviewer-authority-manifest-v0.3",
+        "approval-token-v0.3"
+      ],
+      "status": "PASS",
+      "verifier_id": "reviewer-authority-binding-verify",
+      "verifier_name": "verify_reviewer_authority_binding"
+    },
+    {
+      "primary_output": "DECISION ENVELOPE APPROVAL BINDING VERIFY PASS",
+      "source_artifact_ids": [
+        "approved-decision-envelope-v0.3",
+        "approval-token-v0.3",
+        "reviewer-authority-manifest-v0.3"
+      ],
+      "status": "PASS",
+      "verifier_id": "decision-envelope-approval-binding-verify",
+      "verifier_name": "verify_decision_envelope_approval_binding"
+    },
+    {
+      "primary_output": "EVIDENCE MANIFEST BINDING VERIFY PASS",
+      "source_artifact_ids": [
+        "evidence-bound-decision-envelope-v0.4",
+        "evidence-manifest-v0.4"
+      ],
+      "status": "PASS",
+      "verifier_id": "evidence-manifest-binding-verify",
+      "verifier_name": "verify_evidence_manifest_binding"
+    },
+    {
+      "primary_output": "LEDGER BUNDLE VERIFY PASS",
+      "source_artifact_ids": [
+        "verification-bundle-v0.5"
+      ],
+      "status": "PASS",
+      "verifier_id": "ledger-bundle-verify",
+      "verifier_name": "verify_ledger_bundle"
+    },
+    {
+      "primary_output": "VERIFICATION RECEIPT VERIFY PASS",
+      "source_artifact_ids": [
+        "verification-receipt-v0.6"
+      ],
+      "status": "PASS",
+      "verifier_id": "verification-receipt-verify",
+      "verifier_name": "verify_verification_receipt"
+    },
+    {
+      "primary_output": "RECEIPT INDEX VERIFY PASS",
+      "source_artifact_ids": [
+        "receipt-index-v0.7"
+      ],
+      "status": "PASS",
+      "verifier_id": "receipt-index-verify",
+      "verifier_name": "verify_receipt_index"
+    },
+    {
+      "primary_output": "CLI/UI SEMANTIC PARITY PASS",
+      "source_artifact_ids": [
+        "local-verifier-ui-v0.8"
+      ],
+      "status": "PASS",
+      "verifier_id": "local-verifier-ui-inspection",
+      "verifier_name": "local_verifier_ui"
+    }
+  ]
+}
